@@ -1,0 +1,10 @@
+# Ativa o módulo de reescrita de URLs do Apache
+RewriteEngine On
+
+# Define o diretório base para a reescrita de URLs
+RewriteBase /
+
+# Redireciona tudo que não é uma pasta ou um arquivo existente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [L]
