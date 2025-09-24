@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FutPlay - Plataforma de Futebol Amador</title>
     <meta name="description" content="FutPlay - A plataforma completa para gerenciar equipes de futebol amador e seus confrontos">
-    
+
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
@@ -28,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="feed-confrontos.html">Início</a>
+                        <a class="nav-link" href="../app/views/feed-confrontos.html">Início</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#como-funciona">Como Funciona</a>
@@ -40,7 +42,7 @@
                         <a class="nav-link" href="#contato">Contato</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-light ms-2 px-3" href="cadastro-equipe.html">Cadastrar Equipe</a>
+                        <a class="nav-link btn btn-outline-light ms-2 px-3" href="../app/views/cadastro-equipe.html">Cadastrar Equipe</a>
                     </li>
                 </ul>
             </div>
@@ -60,10 +62,10 @@
                             A plataforma completa para cadastrar equipes, organizar confrontos e acompanhar resultados do futebol amador. Simples, rápido e eficiente.
                         </p>
                         <div class="d-flex flex-column flex-sm-row gap-3 animate-fade-in-delay-2">
-                            <a href="cadastro-equipe.html" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
+                            <a href="../app/views/cadastro-equipe.html" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
                                 <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                             </a>
-                            <a href="cadastro-confronto.html" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
+                            <a href="../app/views/cadastro-confronto.html" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
                                 <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                             </a>
                         </div>
@@ -87,7 +89,7 @@
                     <p class="lead text-muted">Três passos simples para começar a usar nossa plataforma</p>
                 </div>
             </div>
-            
+
             <div class="row g-4">
                 <!-- Passo 1 -->
                 <div class="col-lg-4">
@@ -146,7 +148,7 @@
                     <p class="lead text-muted">Tudo que você precisa para gerenciar seu futebol amador</p>
                 </div>
             </div>
-            
+
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">
                     <img src="assets/images/team-image.jpg" alt="Equipes de Futebol" class="img-fluid rounded-4 shadow">
@@ -203,10 +205,10 @@
                     <h2 class="display-5 fw-bold mb-3">Pronto para Começar?</h2>
                     <p class="lead mb-4">Cadastre sua equipe agora e comece a organizar seus confrontos</p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                        <a href="cadastro-equipe.html" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
+                        <a href="../app/views/cadastro-equipe.html" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
                             <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                         </a>
-                        <a href="cadastro-confronto.html" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
+                        <a href="../app/views/cadastro-confronto.html" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
                             <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                         </a>
                     </div>
@@ -227,17 +229,17 @@
                         A plataforma completa para gerenciar equipes de futebol amador e seus confrontos. Simples, rápido e eficiente.
                     </p>
                 </div>
-                
+
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3">Links Rápidos</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="cadastro-equipe.html" class="text-light text-decoration-none">
+                            <a href="../app/views/cadastro-equipe.html" class="text-light text-decoration-none">
                                 <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="cadastro-confronto.html" class="text-light text-decoration-none">
+                            <a href="../app/views/cadastro-confronto.html" class="text-light text-decoration-none">
                                 <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                             </a>
                         </li>
@@ -248,7 +250,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3">Contato</h5>
                     <div class="mb-3">
@@ -259,7 +261,7 @@
                             <i class="bi bi-telephone-fill me-2"></i>(11) 99999-9999
                         </p>
                     </div>
-                    
+
                     <h6 class="fw-semibold mb-3">Redes Sociais</h6>
                     <div class="d-flex gap-3">
                         <a href="#" class="text-light fs-4" title="Facebook">
@@ -277,9 +279,9 @@
                     </div>
                 </div>
             </div>
-            
+
             <hr class="my-4 border-secondary">
-            
+
             <div class="row">
                 <div class="col-12 text-center">
                     <p class="text-light mb-0">
@@ -292,9 +294,9 @@
 
     <!-- Bootstrap 5.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
 </body>
-</html>
 
+</html>
