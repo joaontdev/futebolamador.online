@@ -1,1 +1,6 @@
-git
+# Ignorar a pasta de dependências do Composer
+/vendor
+
+# Ignorar o arquivo de variáveis de ambiente
+.env
+.htaccess
