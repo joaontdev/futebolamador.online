@@ -4,5 +4,5 @@
 
     # Regra principal: Redireciona TODAS as requisições
     # para o script index.php dentro da pasta /public
-    RewriteRule ^(.*)$ public/index.php [L,QSA]
+    RewriteRule ^(.*)$ index.php [L,QSA]
 </IfModule>

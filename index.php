@@ -2,7 +2,7 @@
 // public/index.php
 
 // 1. Carrega o arquivo que contém o mapa de rotas e a função de roteamento
-require __DIR__ . '/../app/routes.php';
+require __DIR__ . '/app/routes.php';
 
 // 2. Pega a URI da requisição (ex: "/login", "/cadastro-equipe")
 $requestUri = $_SERVER['REQUEST_URI'];
