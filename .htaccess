@@ -1,10 +1,8 @@
-# Ativa o módulo de reescrita de URLs do Apache
-RewriteEngine On
+<IfModule mod_rewrite.c>
+    # Ativa o motor de reescrita de URL
+    RewriteEngine On
 
-# Define o diretório base para a reescrita de URLs
-RewriteBase /
-
-# Redireciona tudo que não é uma pasta ou um arquivo existente
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ public/index.php [L]
+    # Regra principal: Redireciona TODAS as requisições
+    # para o script index.php dentro da pasta /public
+    RewriteRule ^(.*)$ public/index.php [L,QSA]
+</IfModule>
