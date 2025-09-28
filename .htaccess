@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    # Ativa o motor de reescrita de URL
+    RewriteEngine On
+
+    # Regra principal: Redireciona TODAS as requisições
+    # para o script index.php dentro da pasta /public
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
