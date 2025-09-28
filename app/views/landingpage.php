@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="<?=BASE_URL?>/public/assets/css/style.css">
 </head>
 
 <body>
@@ -165,7 +165,7 @@
 
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">
-                    <img src="assets/images/team-image.jpg" alt="Equipes de Futebol" class="img-fluid rounded-4 shadow">
+                    <img src="../../public/assets/images/team-image.jpg" alt="Equipes de Futebol" class="img-fluid rounded-4 shadow">
                 </div>
                 <div class="col-lg-6">
                     <div class="ps-lg-4">

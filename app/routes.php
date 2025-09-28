@@ -4,8 +4,8 @@
 
 // (O array que criamos acima fica aqui)
 $routes = [
-    '/' => __DIR__ . '/views/landingpage.html',
-    '/inicio' => __DIR__ . '/views/landingpage.html',
+    '/' => __DIR__ . '/views/landingpage.php',
+    '/inicio' => __DIR__ . '/views/landingpage.php',
     '/nova-equipe' => __DIR__ . '/views/cadastro-equipe.html',
     '/novo-confronto' => __DIR__ . '/views/cadastro-confronto.html',
 ];
