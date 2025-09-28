@@ -23,6 +23,7 @@ define('BASE_URL', $_ENV['APP_URL']);
 // 4. Carrega o arquivo de rotas.
 require __DIR__ . '/../app/routes.php';
 
+echo '<pre>'; print_r(BASE_URL);echo '</pre>';exit;
 
 // --- ROTEAMENTO ---
 
