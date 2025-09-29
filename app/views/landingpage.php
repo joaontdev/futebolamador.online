@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../app/views/feed-confrontos.html">Início</a>
+                        <a class="nav-link" href="<?=BASE_URL?>/app/views/feed-confrontos.html">Início</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#como-funciona">Como Funciona</a>
@@ -43,7 +43,7 @@
                         <a class="nav-link" href="#contato">Contato</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-light ms-2 px-3" href="/futplay-v2/nova-equipe">Cadastrar
+                        <a class="nav-link btn btn-outline-light ms-2 px-3" href="<?=BASE_URL?>/nova-equipe">Cadastrar
                             Equipe</a>
                     </li>
                 </ul>
@@ -65,10 +65,10 @@
                             do futebol amador. Simples, rápido e eficiente.
                         </p>
                         <div class="d-flex flex-column flex-sm-row gap-3 animate-fade-in-delay-2">
-                            <a href="/futplay-v2/nova-equipe" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
+                            <a href="<?=BASE_URL?>/nova-equipe" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
                                 <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                             </a>
-                            <a href="/futplay-v2/novo-confronto"
+                            <a href="<?=BASE_URL?>/novo-confronto"
                                 class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
                                 <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                             </a>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-image-container animate-slide-in">
-                        <img src="assets/images/hero-image.png" alt="Futebol Amador"
+                        <img src="<?=BASE_URL?>/public/assets/images/hero-image.png" alt="Futebol Amador"
                             class="img-fluid rounded-4 shadow-lg">
                     </div>
                 </div>
@@ -165,7 +165,7 @@
 
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">
-                    <img src="../../public/assets/images/team-image.jpg" alt="Equipes de Futebol" class="img-fluid rounded-4 shadow">
+                    <img src="<?=BASE_URL?>/public/assets/images/team-image.jpg" alt="Equipes de Futebol" class="img-fluid rounded-4 shadow">
                 </div>
                 <div class="col-lg-6">
                     <div class="ps-lg-4">
@@ -221,10 +221,10 @@
                     <h2 class="display-5 fw-bold mb-3">Pronto para Começar?</h2>
                     <p class="lead mb-4">Cadastre sua equipe agora e comece a organizar seus confrontos</p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                        <a href="/futplay-v2/nova-equipe" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
+                        <a href="<?=BASE_URL?>/nova-equipe" class="btn btn-warning btn-lg px-4 py-3 fw-semibold">
                             <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                         </a>
-                        <a href="/futplay-v2/novo-confronto" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
+                        <a href="<?=BASE_URL?>/novo-confronto" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
                             <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                         </a>
                     </div>
@@ -251,12 +251,12 @@
                     <h5 class="fw-bold mb-3">Links Rápidos</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="/futplay-v2/nova-equipe" class="text-light text-decoration-none">
+                            <a href="<?=BASE_URL?>/nova-equipe" class="text-light text-decoration-none">
                                 <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="/futplay-v2/novo-confronto" class="text-light text-decoration-none">
+                            <a href="<?=BASE_URL?>/novo-confronto" class="text-light text-decoration-none">
                                 <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                             </a>
                         </li>
@@ -313,7 +313,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="public/assets/js/script.js"></script>
+    <script src="<?=BASE_URL?>/public/assets/js/script.js"></script>
 </body>
 
 </html>

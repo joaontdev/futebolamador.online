@@ -23,13 +23,10 @@ define('BASE_URL', $_ENV['APP_URL']);
 // 4. Carrega o arquivo de rotas.
 require __DIR__ . '/../app/routes.php';
 
-echo '<pre>'; print_r(BASE_URL);echo '</pre>';exit;
-
 // --- ROTEAMENTO ---
 
 // 5. Pega a URI da requisição (ex: "/futplay-v2/login").
 $requestUri = $_SERVER['REQUEST_URI'];
-
 
 // 6. Extrai o caminho da URL base (ex: "/futplay-v2") para poder limpá-lo da URI.
 // Isso torna o sistema portátil para qualquer domínio ou subdiretório.

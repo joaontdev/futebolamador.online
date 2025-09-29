@@ -4,10 +4,10 @@
 
 // (O array que criamos acima fica aqui)
 $routes = [
-    '/' => __DIR__ . '/views/landingpage.php',
+    // '/' => __DIR__ . '/views/landingpage.php',
     '/inicio' => __DIR__ . '/views/landingpage.php',
-    '/nova-equipe' => __DIR__ . '/views/cadastro-equipe.html',
-    '/novo-confronto' => __DIR__ . '/views/cadastro-confronto.html',
+    '/nova-equipe' => __DIR__ . '/views/cadastro-equipe.php',
+    '/novo-confronto' => __DIR__ . '/views/cadastro-confronto.php',
 ];
 
 // Função que processa a rota
