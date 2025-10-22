@@ -1,43 +1,46 @@
 <?php
 
-use Dotenv\Dotenv;
+// public/index.php
 
+// --- CARREGAMENTO E CONFIGURAÇÃO ---
+
+// 1. Carrega o autoloader do Composer para usar bibliotecas de terceiros.
+use Dotenv\Dotenv;
 require_once __DIR__ . '/vendor/autoload.php';
 
-// Carrega variáveis do .env
+// 2. Carrega as variáveis de ambiente do arquivo .env.
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Define BASE_URL
-define('BASE_URL', $_ENV['APP_URL'] ?? '');
+// 3. Define a constante BASE_URL a partir do valor em .env.
+define('BASE_URL', $_ENV['APP_URL']);
 
-// Carrega rotas
+// 4. Carrega o arquivo de rotas.
 require __DIR__ . '/app/routes.php';
 
-// Pega URI atual
-$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+// --- ROTEAMENTO ---
 
+// 5. Pega a URI da requisição.
+$requestUri = $_SERVER['REQUEST_URI'];
 
-// Remove querystring
+// 6. Remove a querystring (tudo após o '?').
 $requestUri = strtok($requestUri, '?');
 
-// Remove /index.php da URI (HostGator e similares)
-$requestUri = str_replace('/index.php', '', $requestUri);
-
-// Ajuste de base path (para ambiente local)
-$basePath = parse_url(BASE_URL, PHP_URL_PATH);
-if (!empty($basePath) && strpos($requestUri, $basePath) === 0) {
-    $requestUri = substr($requestUri, strlen($basePath));
+// 7. Adiciona uma lógica condicional para ambientes diferentes
+if ($_ENV['APP_ENV'] === 'local') {
+    // Remove a parte da URI referente ao diretório do projeto local.
+    // Usamos parse_url para pegar o caminho de APP_URL
+    $basePath = parse_url(BASE_URL, PHP_URL_PATH);
+    if (!empty($basePath) && strpos($requestUri, $basePath) === 0) {
+        $requestUri = substr($requestUri, strlen($basePath));
+    }
 }
 
-// Normaliza URI
-// $requestUri = trim($requestUri, '/');
-// echo '<pre>'; print_r($requestUri);echo '</pre>';exit;
 
-// Garante que tenha um valor padrão
-if ($requestUri === '') {
+// 8. Garante que a URI seja "/" se estiver vazia.
+if (empty($requestUri) || $requestUri === false) {
     $requestUri = '/';
 }
 
-// Roteia
+// 9. Chama a função de roteamento com a URI limpa.
 routeToView($requestUri, $routes);
