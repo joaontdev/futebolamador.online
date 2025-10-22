@@ -14,15 +14,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?=BASE_URL?>/public/assets/css/style.css">
-    <link rel="stylesheet" href="<?=BASE_URL?>/public/assets/css/cadastro.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/cadastro.css">
 </head>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="<?=BASE_URL?>/inicio">
+            <a class="navbar-brand fw-bold fs-3" href="<?= BASE_URL ?>/inicio">
                 <i class="bi bi-trophy-fill me-2"></i>FutPlay
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=BASE_URL?>/inicio">Voltar ao Início</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>/inicio">Voltar ao Início</a>
                     </li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
                         </div>
 
                         <!-- Form -->
-                        <form id="cadastroEquipeForm" class="needs-validation" novalidate>
+                        <form  id="cadastroEquipeForm" class="needs-validation" novalidate>
                             <div class="row g-4">
                                 <!-- Nome da Equipe -->
                                 <div class="col-12">
@@ -164,7 +164,7 @@
                                         <button type="submit" class="btn btn-success btn-lg px-5 py-3 fw-semibold">
                                             <i class="bi bi-check-circle me-2"></i>Cadastrar Equipe
                                         </button>
-                                        <a href="<?=BASE_URL?>/inicio"
+                                        <a href="<?= BASE_URL ?>/inicio"
                                             class="btn btn-outline-secondary btn-lg px-5 py-3 fw-semibold">
                                             <i class="bi bi-arrow-left me-2"></i>Cancelar
                                         </a>
@@ -200,7 +200,7 @@
                     </p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a href="<?=BASE_URL?>/inicio" class="btn btn-success px-4">
+                    <a href="<?= BASE_URL ?>/inicio" class="btn btn-success px-4">
                         <i class="bi bi-house-fill me-2"></i>Voltar ao Início
                     </a>
                     <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
@@ -229,17 +229,17 @@
                     <h5 class="fw-bold mb-3">Links Rápidos</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="<?=BASE_URL?>/nova-equipe" class="text-light text-decoration-none">
+                            <a href="<?= BASE_URL ?>/nova-equipe" class="text-light text-decoration-none">
                                 <i class="bi bi-people-fill me-2"></i>Cadastrar Equipe
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?=BASE_URL?>/novo-confronto" class="text-light text-decoration-none">
+                            <a href="<?= BASE_URL ?>/novo-confronto" class="text-light text-decoration-none">
                                 <i class="bi bi-calendar-event me-2"></i>Adicionar Confronto
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?=BASE_URL?>/inicio#como-funciona" class="text-light text-decoration-none">
+                            <a href="<?= BASE_URL ?>/inicio#como-funciona" class="text-light text-decoration-none">
                                 <i class="bi bi-info-circle me-2"></i>Como Funciona
                             </a>
                         </li>
@@ -291,8 +291,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="<?=BASE_URL?>/public/assets/js/script.js"></script>
-    <script src="<?=BASE_URL?>/public/assets/js/cadastro.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/js/script.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/js/cadastro.js"></script>
 </body>
 
 </html>

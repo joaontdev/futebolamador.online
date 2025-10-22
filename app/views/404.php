@@ -14,15 +14,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/404.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/404.css">
 </head>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="index.html">
+            <a class="navbar-brand fw-bold fs-3" href="<?= BASE_URL ?>/inicio">
                 <i class="bi bi-trophy-fill me-2"></i>FutPlay
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Voltar ao Início</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>/inicio">Voltar ao Início</a>
                     </li>
                 </ul>
             </div>
@@ -235,8 +235,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/404.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/js/script.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/js/404.js"></script>
 </body>
 
 </html>
