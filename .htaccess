@@ -1,1 +1,25 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
+    # Define o caminho base do projeto. Essencial para subpastas.
+    RewriteBase /
+
+    # --- CONDIÇÕES IMPORTANTES ---
+    # Se a requisição NÃO (!) for para um arquivo (-f) que existe fisicamente...
+    # E a requisição NÃO (!) for para um diretório (-d) que existe fisicamente...
+
+    # Redireciona tudo para o script principal na pasta public
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ ./index.php [L,QSA]
+</IfModule>
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^futebolamador\.online$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.futebolamador\.online$
+RewriteRule ^/?$ "https\:\/\/futebolamador\.online\/" [R=301,L]
+
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit
