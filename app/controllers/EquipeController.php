@@ -3,6 +3,18 @@
 // Define o namespace para organizar melhor as classes (prática recomendada)
 namespace App\Controllers;
 
+
+// --- Contorno do Autoloader: Incluindo dependências manualmente ---
+// Usamos __DIR__ (diretório atual) e ../ (voltar um nível) para garantir 
+// que o caminho seja sempre correto, independentemente de onde o script seja chamado.
+
+// Inclui o modelo Equipe: (app/controllers/../models/Equipe.php)
+require_once __DIR__ . '/../models/Equipe.php';
+
+// Inclui a classe de Conexão Database: (app/controllers/../core/Database.php)
+require_once __DIR__ . '/../core/Database.php';
+// ----------------------------------------------------------------
+
 use App\Models\Equipe;
 
 /**
@@ -30,7 +42,7 @@ class EquipeController
 
         try {
             // 3. Tenta Criar e Inserir
-            
+
             // Cria uma nova instância da Equipe.
             // Se o Autoloader falhar AQUI, o erro Fatal ainda acontecerá, 
             // mas assumimos que o Autoloader está funcionando após as correções no composer.json.
@@ -45,13 +57,12 @@ class EquipeController
                 ]);
             } else {
                 // Falha na inserção (se o método insert retornar false por algum motivo)
-                http_response_code(500); 
+                http_response_code(500);
                 echo json_encode([
                     'success' => false,
                     'message' => 'Erro ao salvar a equipe no banco de dados (Insert retornou false).',
                 ]);
             }
-
         } catch (\PDOException $e) {
             // 5. CAPTURA ERROS DE BANCO DE DADOS (Ex: Falha na conexão, Query SQL inválida)
             http_response_code(500);
@@ -61,9 +72,8 @@ class EquipeController
                 'message' => 'Erro de conexão ou query no banco de dados.',
                 // Não é seguro expor a mensagem exata do banco para o usuário final
             ]);
-            
         } catch (\Exception $e) {
-             // 6. CAPTURA OUTROS ERROS (Ex: Classes não encontradas, erros de código)
+            // 6. CAPTURA OUTROS ERROS (Ex: Classes não encontradas, erros de código)
             http_response_code(500);
             error_log("Erro geral: " . $e->getMessage()); // Loga o erro internamente
             echo json_encode([
@@ -71,7 +81,7 @@ class EquipeController
                 'message' => 'Ocorreu um erro interno inesperado.',
             ]);
         }
-        
+
         // Finaliza a execução para garantir que nada mais seja impresso no corpo JSON.
         exit;
     }
