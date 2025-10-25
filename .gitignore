@@ -1,3 +1,5 @@
 # Ignorar a pasta de dependências do Composer
 
 # Ignorar o arquivo de variáveis de ambiente
+.env
+.htaccess
