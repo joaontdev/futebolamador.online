@@ -16,7 +16,7 @@ class Database
     private const DB_HOST = DB_HOST;
     private const DB_NAME = DB_NAME; // Nome sugerido anteriormente
     private const DB_USER = DB_USER;
-    private const DB_PASS = '';
+    private const DB_PASS = DB_PASS;
 
     // Variável estática para armazenar a instância da conexão PDO
     private static ?PDO $connection = null;
