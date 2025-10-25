@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const resposta = await requisicao.json();
 
+        console.log(resposta);
+
         // Simulate API call
         setTimeout(() => {
             // Hide loading state
