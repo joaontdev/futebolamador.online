@@ -211,6 +211,38 @@
         </div>
     </div>
 
+     <!-- Dnager Modal -->
+    <div class="modal fade" id="dangerModal" tabindex="-1" aria-labelledby="dangerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="dangerModalLabel">
+                        <i class="bi bi-check-circle-fill me-2"></i>Alerta!
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="mb-3">
+                        <i class="bi bi-trophy-fill text-danger" style="font-size: 3rem;"></i>
+                    </div>
+                    <h6 class="fw-bold mb-3">Erro!</h6>
+                    <p class="text-muted mb-0">
+                        Não foi possivel salvar a equipe
+                    </p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a href="<?= BASE_URL ?>/inicio" class="btn btn-danger px-4">
+                        <i class="bi bi-house-fill me-2"></i>Voltar ao Início
+                    </a>
+                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+                        Cadastrar Outra Equipe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer-bg text-white py-5 mt-5">
         <div class="container">
@@ -291,6 +323,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
+     <script>
+        const url = "<?= BASE_URL ?>";
+     </script>
     <script src="<?= BASE_URL ?>/public/assets/js/script.js"></script>
     <script src="<?= BASE_URL ?>/public/assets/js/cadastro.js"></script>
 </body>
