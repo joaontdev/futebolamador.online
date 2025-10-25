@@ -2,7 +2,7 @@
     RewriteEngine On
 
     # Define o caminho base do projeto. Essencial para subpastas.
-    RewriteBase /
+    RewriteBase /futebolamador.online/
 
     # --- CONDIÇÕES IMPORTANTES ---
     # Se a requisição NÃO (!) for para um arquivo (-f) que existe fisicamente...
