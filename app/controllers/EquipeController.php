@@ -89,34 +89,34 @@ class EquipeController
 
     // Função que cria uma list group de todas as equipes registradas no banco de dados.
     // Essa é a lista:<a href="#" class="list-group-item list-group-item-action">
-                            //     <div class="d-flex w-100 justify-content-between">
-                            //         <h5 class="mb-1">NOME DA EQUIPE</h5>
-                            //         <small class="text-body-secondary">-</small>
-                            //     </div>
-                            //     <p class="mb-1">Representante: Nome do representante</p>
-                            //     <small class="text-body-secondary">Localizcao e ano de fundação</small>
-                            // </a>
+    //     <div class="d-flex w-100 justify-content-between">
+    //         <h5 class="mb-1">NOME DA EQUIPE</h5>
+    //         <small class="text-body-secondary">-</small>
+    //     </div>
+    //     <p class="mb-1">Representante: Nome do representante</p>
+    //     <small class="text-body-secondary">Localizcao e ano de fundação</small>
+    // </a>
     public static function listarEquipes()
     {
 
         $lista = "";
 
-         // Cria uma nova instância da Equipe.
-            // Se o Autoloader falhar AQUI, o erro Fatal ainda acontecerá, 
-            // mas assumimos que o Autoloader está funcionando após as correções no composer.json.
-            $equipe = new Equipe([]);
-            $equipes = $equipe->getEquipes();
+        // Cria uma nova instância da Equipe.
+        // Se o Autoloader falhar AQUI, o erro Fatal ainda acontecerá, 
+        // mas assumimos que o Autoloader está funcionando após as correções no composer.json.
+        $equipe = new Equipe([]);
+        $equipes = $equipe->getEquipes();
 
-    
+
 
         foreach ($equipes as $equipe) {
             $lista .= "<a href=\"#\" class=\"list-group-item list-group-item-action\">";
             $lista .= "<div class=\"d-flex w-100 justify-content-between\">";
-            $lista .= "<h5>" . $equipe['nomeEquipe'] . "</h5>";
-            $lista .= "<small class=\"text-body-secondary\">-</small>";
+            $lista .= "<h6 class=\"mb-1 text-success\"><i class=\"bi bi-people\"></i> " . $equipe['nomeEquipe'] . "</h6>";
+            $lista .= "<small class=\"text-body-secondary\"></small>";
             $lista .= "</div>";
-            $lista .= "<p class=\"mb-1\">Representante: " . $equipe['nomeComandante'] . "</p>";
-            $lista .= "<small class=\"text-body-secondary\">";
+            $lista .= "<p class=\"mb-1\"><i class=\"bi bi-person\"></i> Representante: " . $equipe['nomeComandante'] . "</p>";
+            $lista .= "<small class=\"text-body-secondary\"><i class=\"bi bi-geo-alt\"></i> ";
             $lista .= $equipe['logradouro'] . ", ";
             $lista .= $equipe['cidade'] . ", ";
             $lista .= $equipe['estado'] . ", ";
@@ -125,7 +125,5 @@ class EquipeController
         }
 
         return $lista;
-
-
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '../../controllers/EquipeController.php';
+
 use App\Controllers\EquipeController;
 
 
@@ -28,37 +29,12 @@ use App\Controllers\EquipeController;
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="#">
-                <i class="bi bi-trophy-fill me-2"></i>FutPlay
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/app/views/feed-confrontos.html">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#como-funciona">Como Funciona</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#recursos">Recursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contato">Contato</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-light ms-2 px-3" href="<?= BASE_URL ?>/nova-equipe">Cadastrar
-                            Equipe</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+
+    <?php
+    // Inclui a nav bar da pasta partials
+    require_once __DIR__ . '/../views/partials/navbar.php';
+
+    ?>
 
     <main class="main-content">
         <div class="container">
@@ -67,13 +43,12 @@ use App\Controllers\EquipeController;
                     <div class="form-container pt-5">
                         <!-- Header -->
                         <div class="text-center mb-5 mt-5">
-                            <div
-                                class="form-icon bg-custom text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4">
-                                <i class="bi bi-people-fill fs-2"></i>
+                            <div class="d-inline-flex align-items-center justify-content-center mb-4">
+                                <i class="bi bi-people-fill fs-2 text-success"></i>
                             </div>
                             <h1 class="display-6 fw-bold text-dark mb-3">Equipes cadastradas</h1>
                             <p class="lead text-muted">
-                                Preencha os dados da sua equipe para começar a usar o FutPlay
+                                Essas são as equipes já cadastradas na plataforma.
                             </p>
                         </div>
                         <div class="list-group">
@@ -81,10 +56,8 @@ use App\Controllers\EquipeController;
                             <?php
 
                             // Criar a listagem ser usando apenas o require onde, pois o name space nao funciona em minha hospedagem
-                            
+
                             echo EquipeController::listarEquipes();
-
-
 
 
                             ?>
