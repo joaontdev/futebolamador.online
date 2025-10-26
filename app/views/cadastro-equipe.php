@@ -57,7 +57,7 @@
                         </div>
 
                         <!-- Form -->
-                        <form  id="cadastroEquipeForm" class="needs-validation" novalidate>
+                        <form id="cadastroEquipeForm" class="needs-validation" novalidate>
                             <div class="row g-4">
                                 <!-- Nome da Equipe -->
                                 <div class="col-12">
@@ -182,62 +182,71 @@
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title" id="successModalLabel">
-                        <i class="bi bi-check-circle-fill me-2"></i>Equipe Cadastrada!
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="successModalLabel">
+                       Equipe Cadastrada!
+                    </h5> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center py-4">
+                <div class="modal-body text-center">
                     <div class="mb-3">
                         <i class="bi bi-trophy-fill text-success" style="font-size: 3rem;"></i>
                     </div>
-                    <h6 class="fw-bold mb-3">Parabéns!</h6>
+                    <h5>Parabéns!</h5>
                     <p class="text-muted mb-0">
                         Sua equipe foi cadastrada com sucesso na plataforma FutPlay.
                         Agora você pode começar a adicionar confrontos!
                     </p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a href="<?= BASE_URL ?>/inicio" class="btn btn-success px-4">
-                        <i class="bi bi-house-fill me-2"></i>Voltar ao Início
-                    </a>
-                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
-                        Cadastrar Outra Equipe
-                    </button>
+                    <div class="col-md-12 w-100">
+                        <a role="button" href="<?= BASE_URL ?>/inicio" class="btn btn-success btn-lg btn-block w-100">
+                            <i class="bi bi-house-fill me-2"></i>Voltar ao Início
+                        </a>
+                    </div>
+                    <div class="col-md-12 mt-2 w-100">
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block w-100" data-bs-dismiss="modal">
+                            Cadastrar Outra Equipe
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-     <!-- Dnager Modal -->
+    <!-- Dnager Modal -->
     <div class="modal fade" id="dangerModal" tabindex="-1" aria-labelledby="dangerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="dangerModalLabel">
-                        <i class="bi bi-check-circle-fill me-2"></i>Alerta!
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="successModalLabel">
+                       Equipe Cadastrada!
+                    </h5> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center py-4">
+                <div class="modal-body text-center">
                     <div class="mb-3">
-                        <i class="bi bi-trophy-fill text-danger" style="font-size: 3rem;"></i>
+                        <i class="bi bi-exclamation-triangle" style="font-size: 3rem;"></i>
+                        <!-- <i class="bi bi-trophy-fill text-danger" style="font-size: 3rem;"></i> -->
                     </div>
-                    <h6 class="fw-bold mb-3">Erro!</h6>
+                    <h5>Erro!</h5>
                     <p class="text-muted mb-0">
-                        Não foi possivel salvar a equipe
+                        Ocorreu um erro ao tentar cadastrar a equipe. Por favor, tente novamente.
                     </p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a href="<?= BASE_URL ?>/inicio" class="btn btn-danger px-4">
-                        <i class="bi bi-house-fill me-2"></i>Voltar ao Início
-                    </a>
-                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
-                        Cadastrar Outra Equipe
-                    </button>
+                    <div class="col-md-12 w-100">
+                        <a role="button" href="<?= BASE_URL ?>/inicio" class="btn btn-danger btn-lg btn-block w-100">
+                            <i class="bi bi-house-fill me-2"></i>Voltar ao Início
+                        </a>
+                    </div>
+                    <div class="col-md-12 mt-2 w-100">
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block w-100" data-bs-dismiss="modal">
+                            Tentar novamente
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -323,9 +332,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-     <script>
+    <script>
         const url = "<?= BASE_URL ?>";
-     </script>
+    </script>
     <script src="<?= BASE_URL ?>/public/assets/js/script.js"></script>
     <script src="<?= BASE_URL ?>/public/assets/js/cadastro.js"></script>
 </body>

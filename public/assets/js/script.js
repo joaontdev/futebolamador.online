@@ -1,11 +1,11 @@
 // FutPlay Landing Page JavaScript
 
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-fade-in');
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Efeito parallax suave para a hero section
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const scrolled = window.pageYOffset;
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateCounter(element, target, duration = 2000) {
         let start = 0;
         const increment = target / (duration / 16);
-        
+
         function updateCounter() {
             start += increment;
             if (start < target) {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.textContent = target;
             }
         }
-        
+
         updateCounter();
     }
 
@@ -91,11 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Efeito de hover nos cards
     document.querySelectorAll('.feature-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validação simples para formulários (se houver)
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             const inputs = form.querySelectorAll('input[required], textarea[required]');
             let isValid = true;
-            
+
             inputs.forEach(input => {
                 if (!input.value.trim()) {
                     isValid = false;
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     input.classList.remove('is-invalid');
                 }
             });
-            
+
             if (!isValid) {
                 e.preventDefault();
                 alert('Por favor, preencha todos os campos obrigatórios.');
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function typeWriter(element, text, speed = 100) {
         let i = 0;
         element.innerHTML = '';
-        
+
         function type() {
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(type, speed);
             }
         }
-        
+
         type();
     }
 
@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
         transition: all 0.3s ease;
         pointer-events: none;
     `;
-    
+
     document.body.appendChild(backToTopButton);
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 300) {
             backToTopButton.style.opacity = '1';
             backToTopButton.style.pointerEvents = 'auto';
@@ -177,8 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
             backToTopButton.style.pointerEvents = 'none';
         }
     });
-    
-    backToTopButton.addEventListener('click', function() {
+
+    backToTopButton.addEventListener('click', function () {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Preloader (opcional)
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         const preloader = document.querySelector('.preloader');
         if (preloader) {
             preloader.style.opacity = '0';
@@ -209,14 +209,14 @@ document.addEventListener('DOMContentLoaded', function() {
             pointer-events: none;
             animation: float 6s linear infinite;
         `;
-        
+
         particle.style.left = Math.random() * 100 + '%';
         particle.style.animationDelay = Math.random() * 6 + 's';
-        
+
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
             heroSection.appendChild(particle);
-            
+
             setTimeout(() => {
                 particle.remove();
             }, 6000);

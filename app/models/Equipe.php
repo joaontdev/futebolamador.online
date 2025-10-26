@@ -91,4 +91,38 @@ class Equipe
             return false;
         }
     }
+
+    
+    public function getEquipes(): array
+    {
+        $pdo = Database::getConnection();
+        $equipes = [];
+
+
+        $sql = "SELECT * FROM equipes";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        while ($equipe = $stmt->fetchObject()) {
+
+            $equipes[] = [
+                'id' => $equipe->id,
+                'nomeEquipe' => $equipe->nome_equipe,
+                'logradouro' => $equipe->logradouro,
+                'cidade' => $equipe->cidade,
+                'estado' => $equipe->estado,
+                'anoFundacao' => $equipe->ano_fundacao,
+                'nomeComandante' => $equipe->nome_comandante,
+                'status' => $equipe->status,
+                'isDeleted' => $equipe->is_deleted,
+                'createdAt' => $equipe->created_at,
+                'updatedAt' => $equipe->updated_at
+            ];
+
+        }
+
+        return $equipes;
+    }
+
+
 }
