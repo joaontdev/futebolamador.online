@@ -89,14 +89,14 @@ use App\Controllers\EquipeController;
 
                             ?>
 
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <!-- <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">NOME DA EQUIPE</h5>
                                     <small class="text-body-secondary">-</small>
                                 </div>
                                 <p class="mb-1">Representante: Nome do representante</p>
                                 <small class="text-body-secondary">Localizcao e ano de fundação</small>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>
