@@ -109,8 +109,18 @@ class EquipeController
 
 
 
+        $indice = 1;
         foreach ($equipes as $equipe) {
-            $lista .= "<a href=\"#\" class=\"list-group-item list-group-item-action\">";
+
+            $color = "";
+            if ($indice != 1) {
+                $color = "bg-light";
+                $indice = 1;
+            } else {
+                $indice = 0;
+            }
+
+            $lista .= "<a href=\"#\" class=\"list-group-item list-group-item-action $color \">";
             $lista .= "<div class=\"d-flex w-100 justify-content-between\">";
             $lista .= "<h6 class=\"mb-1 text-success\"><i class=\"bi bi-people\"></i> " . $equipe['nomeEquipe'] . "</h6>";
             $lista .= "<small class=\"text-body-secondary\"></small>";
