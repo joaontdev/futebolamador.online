@@ -8,9 +8,13 @@ $routes = [
     '/inicio'               => __DIR__ . '/views/landingpage.php',
     '/equipes-cadastradas'  => __DIR__ . '/views/equipes-cadastradas.php',
     '/nova-equipe'          => __DIR__ . '/views/cadastro-equipe.php',
-    // '/novo-confronto'       => __DIR__ . '/views/cadastro-confronto.php',
+    '/novo-confronto'       => __DIR__ . '/views/cadastro-confronto.php',
     '/nova-equipe/salvar'   => [
         "controller"        => "EquipeController",
+        "method"            => "salvar",
+    ],
+    '/novo-confronto/salvar'   => [
+        "controller"        => "ConfrontoController.php",
         "method"            => "salvar",
     ]
 ];

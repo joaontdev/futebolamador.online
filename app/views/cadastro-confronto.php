@@ -1,3 +1,11 @@
+<?php
+
+require_once __DIR__ . '../../controllers/EquipeController.php';
+
+use App\Controllers\EquipeController;
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -20,24 +28,11 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="<?= BASE_URL ?>/inicio">
-                <i class="bi bi-trophy-fill me-2"></i>FutPlay
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/inicio">Voltar ao Início</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    // Inclui a nav bar da pasta partials
+    require_once __DIR__ . '/../views/partials/navbar.php';
+
+    ?>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -72,8 +67,16 @@
                                     <label for="equipeMandante" class="form-label fw-semibold">
                                         <i class="bi bi-house-fill me-2 text-success"></i>Equipe Mandante *
                                     </label>
-                                    <input type="text" class="form-control form-control-lg" id="equipeMandante"
-                                        name="equipeMandante" placeholder="Nome da equipe da casa" required>
+
+                                    <select name="equipeMandante" id="equipeMandante" class="form-select form-select-lg"
+                                        required>
+                                        <option value="">Selecione a equipe</option>
+                                        <?= EquipeController::getEquipesOptions() ?>
+
+                                    </select>
+
+                                    <!-- <input type="text" class="form-control form-control-lg" id="equipeMandante"
+                                        name="equipeMandante" placeholder="Nome da equipe da casa" required> -->
                                     <div class="invalid-feedback">
                                         Por favor, informe a equipe mandante.
                                     </div>
@@ -84,8 +87,15 @@
                                     <label for="equipeVisitante" class="form-label fw-semibold">
                                         <i class="bi bi-airplane me-2 text-success"></i>Equipe Visitante *
                                     </label>
-                                    <input type="text" class="form-control form-control-lg" id="equipeVisitante"
+
+                                    <select class="form-control form-control-lg" id="equipeVisitante"
                                         name="equipeVisitante" placeholder="Nome da equipe visitante" required>
+                                        <option value="">Selecione a equipe</option>
+                                        <?= EquipeController::getEquipesOptions() ?>
+                                    </select>
+                                    <!-- 
+                                        <input type="text" class="form-control form-control-lg" id="equipeVisitante"
+                                            name="equipeVisitante" placeholder="Nome da equipe visitante" required> -->
                                     <div class="invalid-feedback">
                                         Por favor, informe a equipe visitante.
                                     </div>

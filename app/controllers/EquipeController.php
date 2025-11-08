@@ -136,4 +136,25 @@ class EquipeController
 
         return $lista;
     }
+
+
+    // Função que retornara uma string options de equipes cadastradas
+    public static function getEquipesOptions()
+    {
+
+        $lista = "";
+
+        // Cria uma nova instância da Equipe.
+        // Se o Autoloader falhar AQUI, o erro Fatal ainda acontecerá, 
+        // mas assumimos que o Autoloader está funcionando após as correções no composer.json.
+        $equipe = new Equipe([]);
+        $equipes = $equipe->getEquipes();
+
+
+        foreach ($equipes as $equipe) {
+            // Crie options html
+            $lista .= "<option value=\"" . $equipe['id'] . "\">" . $equipe['nomeEquipe'] . "</option>";
+        }
+        return $lista;
+    }
 }
