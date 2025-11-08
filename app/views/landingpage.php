@@ -61,7 +61,7 @@
                 <div class="col-lg-6">
                     <div class="hero-content text-white">
                         <h1 class="display-4 fw-bold mb-4 animate-fade-in">
-                            Gerencie seu Futebol Amador com o <span class="text-warning">Futebolamador.online</span>
+                            Gerencie seu Futebol Amador com o <span class="text-warning">Futebolamador.<br>online</span>
                         </h1>
                         <p class="lead mb-4 animate-fade-in-delay">
                             A plataforma completa para cadastrar equipes, organizar confrontos e acompanhar resultados
