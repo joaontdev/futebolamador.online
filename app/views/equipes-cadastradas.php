@@ -51,7 +51,7 @@ use App\Controllers\EquipeController;
                                 Essas são as equipes já cadastradas na plataforma.
                             </p>
                         </div>
-                        <div class="list-group">
+                        <div class="list-group mb-5">
 
                             <?php
 

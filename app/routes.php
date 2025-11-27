@@ -14,9 +14,12 @@ $routes = [
         "method"            => "salvar",
     ],
     '/novo-confronto/salvar'   => [
-        "controller"        => "ConfrontoController.php",
+        "controller"        => "ConfrontoController",
         "method"            => "salvar",
-    ]
+    ],
+      '/sucesso-no-cadastro-de-confronto'       => __DIR__ . '/views/partials/pagina-cadastrado-com-sucesso.php',
+      '/erro-no-cadastro-de-confronto'       => __DIR__ . '/views/partials/pagina-informacao-erro.php',
+
 ];
 
 // Função que processa a rota

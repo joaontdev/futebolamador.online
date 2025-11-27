@@ -121,12 +121,12 @@ class EquipeController
             }
 
             $lista .= "<a href=\"#\" class=\"list-group-item list-group-item-action $color \">";
-            $lista .= "<div class=\"d-flex w-100 justify-content-between\">";
-            $lista .= "<h6 class=\"mb-1 text-success\"><i class=\"bi bi-people\"></i> " . $equipe['nomeEquipe'] . "</h6>";
+            $lista .= "<div class=\"d-flex w-100 justify-content-between pt-2 pb-2\">";
+            $lista .= "<h6 class=\"mb-1 text-dark\">" . $equipe['nomeEquipe'] . "</h6>";
             $lista .= "<small class=\"text-body-secondary\"></small>";
             $lista .= "</div>";
-            $lista .= "<p class=\"mb-1\"><i class=\"bi bi-person\"></i> Representante: " . $equipe['nomeComandante'] . "</p>";
-            $lista .= "<small class=\"text-body-secondary\"><i class=\"bi bi-geo-alt\"></i> ";
+            // $lista .= "<p class=\"mb-1\"><i class=\"bi bi-person\"></i> Representante: " . $equipe['nomeComandante'] . "</p>";
+            $lista .= "<small class=\"text-body-secondary\"> ";
             $lista .= $equipe['logradouro'] . ", ";
             $lista .= $equipe['cidade'] . ", ";
             $lista .= $equipe['estado'] . ", ";

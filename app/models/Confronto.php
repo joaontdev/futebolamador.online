@@ -13,21 +13,32 @@ use PDOException;
 class Confronto
 {
     // Propriedades que mapeiam as colunas do banco de dados (em camelCase)
-    public ?int $id = null;
-    public int $equipeMandanteId; // Chave estrangeira
-    public int $equipeVisitanteId; // Chave estrangeira
-    public string $tipoConfronto;
-    public string $dataConfronto; // Formato YYYY-MM-DD
-    public string $horaConfronto; // Formato HH:MM:SS
-    public string $statusConfronto;
-    public string $logradouroConfronto;
-    public string $cidadeConfronto;
-    public string $estadoConfronto;
-    public int $golsMandante = 0;
-    public int $golsVisitante = 0;
+    // public ?int $id = null;
+    // public int $equipeMandanteId; // Chave estrangeira
+    // public int $equipeVisitanteId; // Chave estrangeira
+    // public string $tipoConfronto;
+    // public string $dataConfronto; // Formato YYYY-MM-DD
+    // public string $horaConfronto; // Formato HH:MM:SS
+    // public string $statusConfronto;
+    // public string $logradouroConfronto;
+    // public string $cidadeConfronto;
+    // public string $estadoConfronto;
+    // public int $golsMandante = 0;
+    // public int $golsVisitante = 0;
 
-    // Colunas de controle
-    public int $isDeleted = 0;
+
+    public int $id;
+    public int $id_equipe_mandante;
+    public int $gols_equipe_mandante;
+    public int $id_equipe_visitante;
+    public int $gols_equipe_visitante;
+    public string $resultadoPartida;
+    public string $logradouro;
+    public string $cidade;
+    public string $estado;
+    public string $data_partida;
+    public string $hora_partida;
+
 
     /**
      * Construtor do Confronto.
@@ -36,17 +47,16 @@ class Confronto
     public function __construct(array $data = [])
     {
         if (!empty($data)) {
-            $this->equipeMandanteId = (int) ($data['equipeMandante'] ?? 0);
-            $this->equipeVisitanteId = (int) ($data['equipeVisitante'] ?? 0);
-            $this->tipoConfronto = $data['tipoConfronto'] ?? '';
-            $this->dataConfronto = $data['dataConfronto'] ?? '';
-            $this->horaConfronto = $data['horaConfronto'] ?? '';
-            $this->statusConfronto = $data['statusConfronto'] ?? 'Agendado'; // Default status
-            $this->logradouroConfronto = $data['logradouroConfronto'] ?? '';
-            $this->cidadeConfronto = $data['cidadeConfronto'] ?? '';
-            $this->estadoConfronto = $data['estadoConfronto'] ?? '';
-            $this->golsMandante = (int) ($data['golsMandante'] ?? 0);
-            $this->golsVisitante = (int) ($data['golsVisitante'] ?? 0);
+            $this->id_equipe_mandante       = (int) $data['equipeMandante'];
+            $this->gols_equipe_mandante     = (int) $data['golsEquipeVitoriosa'];
+            $this->id_equipe_visitante      = (int) $data['equipeVisitante'];
+            $this->gols_equipe_visitante    = (int) $data['golsEquipePerdedora'];
+            $this->resultadoPartida         = $data['equipeVitoriosa'];
+            $this->logradouro               = $data['logradouro'];
+            $this->cidade                   = $data['cidade'];
+            $this->estado                   = $data['estado'];
+            $this->data_partida             = $data['dataPartida'];
+            $this->hora_partida             = $data['horaPartida'];
         }
     }
 
@@ -64,33 +74,42 @@ class Confronto
         $pdo = \App\Core\Database::getConnection();
 
         $sql = "INSERT INTO confrontos (
-                    equipe_mandante_id, equipe_visitante_id, tipo_confronto, 
-                    data_confronto, hora_confronto, status_confronto, 
-                    logradouro_confronto, cidade_confronto, estado_confronto, 
-                    gols_mandante, gols_visitante, is_deleted, created_at, updated_at
+            id_equipe_mandante, 
+            gols_equipe_mandante, 
+            id_equipe_visitante, 
+            gols_equipe_visitante, 
+            resultadoPartida, 
+            logradouro, 
+            cidade, 
+            estado, 
+            data_partida, 
+            hora_partida
                 ) VALUES (
-                    :mandante_id, :visitante_id, :tipo, 
-                    :data, :hora, :status, 
-                    :logradouro, :cidade, :estado, 
-                    :gols_m, :gols_v, :is_deleted, NOW(), NOW()
+            :id_equipe_mandante, 
+            :gols_equipe_mandante, 
+            :id_equipe_visitante, 
+            :gols_equipe_visitante, 
+            :resultadoPartida, 
+            :logradouro, 
+            :cidade, 
+            :estado, 
+            :data_partida, 
+            :hora_partida
                 )";
 
         try {
             $stmt = $pdo->prepare($sql);
 
-            // Vincula os valores
-            $stmt->bindValue(':mandante_id', $this->equipeMandanteId, PDO::PARAM_INT);
-            $stmt->bindValue(':visitante_id', $this->equipeVisitanteId, PDO::PARAM_INT);
-            $stmt->bindValue(':tipo', $this->tipoConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':data', $this->dataConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':hora', $this->horaConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':status', $this->statusConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':logradouro', $this->logradouroConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':cidade', $this->cidadeConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':estado', $this->estadoConfronto, PDO::PARAM_STR);
-            $stmt->bindValue(':gols_m', $this->golsMandante, PDO::PARAM_INT);
-            $stmt->bindValue(':gols_v', $this->golsVisitante, PDO::PARAM_INT);
-            $stmt->bindValue(':is_deleted', $this->isDeleted, PDO::PARAM_INT);
+            $stmt->bindValue(':id_equipe_mandante', $this->id_equipe_mandante, PDO::PARAM_INT);
+            $stmt->bindValue(':gols_equipe_mandante', $this->gols_equipe_mandante, PDO::PARAM_INT);
+            $stmt->bindValue(':id_equipe_visitante', $this->id_equipe_visitante, PDO::PARAM_INT);
+            $stmt->bindValue(':gols_equipe_visitante', $this->gols_equipe_visitante, PDO::PARAM_INT);
+            $stmt->bindValue(':resultadoPartida', $this->resultadoPartida, PDO::PARAM_STR);
+            $stmt->bindValue(':logradouro', $this->logradouro, PDO::PARAM_STR);
+            $stmt->bindValue(':cidade', $this->cidade, PDO::PARAM_STR);
+            $stmt->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+            $stmt->bindValue(':data_partida', $this->data_partida, PDO::PARAM_STR);
+            $stmt->bindValue(':hora_partida', $this->hora_partida, PDO::PARAM_STR);
 
             $success = $stmt->execute();
 

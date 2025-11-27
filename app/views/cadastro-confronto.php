@@ -40,169 +40,138 @@ use App\Controllers\EquipeController;
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-xl-8">
                     <div class="form-container">
-                        <!-- Header -->
-                        <div class="text-center mb-5">
-                            <div
-                                class="form-icon bg-custom text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4">
-                                <i class="bi bi-calendar-event fs-2"></i>
-                            </div>
-                            <h1 class="display-6 fw-bold text-dark mb-3">Cadastro de Confronto</h1>
-                            <p class="lead text-muted">
-                                Registre o confronto entre duas equipes com todos os detalhes
-                            </p>
-                        </div>
 
-                        <!-- Form -->
-                        <form id="cadastroConfrontoForm" class="needs-validation" novalidate>
-                            <div class="row g-4">
-                                <!-- Seção: Equipes -->
-                                <div class="col-12">
-                                    <h4 class="fw-bold text-success mb-3">
-                                        <i class="bi bi-people-fill me-2"></i>Equipes
-                                    </h4>
+                        <form action="<?= BASE_URL ?>/novo-confronto/salvar" method="post" class="needs-validation">
+
+                            <!-- Header -->
+                            <div class="text-center mb-5">
+                                <div
+                                    class="form-icon bg-custom text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4">
+                                    <i class="bi bi-people-fill fs-2"></i>
                                 </div>
+                                <h1 class="display-6 fw-bold text-dark mb-3">Cadastro de Confronto</h1>
+                                <p class="lead text-muted">
+                                    Preencha os dados do confronto para aparecer na time line
+                                </p>
+                            </div>
 
-                                <!-- Equipe Mandante -->
-                                <div class="col-md-6">
-                                    <label for="equipeMandante" class="form-label fw-semibold">
-                                        <i class="bi bi-house-fill me-2 text-success"></i>Equipe Mandante *
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">
+                                        Equipe Mandante
                                     </label>
-
-                                    <select name="equipeMandante" id="equipeMandante" class="form-select form-select-lg"
-                                        required>
-                                        <option value="">Selecione a equipe</option>
+                                    <select type="text" class="form-control " name="equipeMandante" required>
+                                        <option value=""></option>
                                         <?= EquipeController::getEquipesOptions() ?>
-
                                     </select>
-
-                                    <!-- <input type="text" class="form-control form-control-lg" id="equipeMandante"
-                                        name="equipeMandante" placeholder="Nome da equipe da casa" required> -->
                                     <div class="invalid-feedback">
                                         Por favor, informe a equipe mandante.
                                     </div>
                                 </div>
-
-                                <!-- Equipe Visitante -->
-                                <div class="col-md-6">
-                                    <label for="equipeVisitante" class="form-label fw-semibold">
-                                        <i class="bi bi-airplane me-2 text-success"></i>Equipe Visitante *
+                                <div class="col-md-2">
+                                    <label class="form-label fw-semibold">
+                                        Gols
                                     </label>
+                                    <select type="text" class="form-control " name="golsEquipeVitoriosa" required>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe os gols da equipe que venceu.
+                                    </div>
+                                </div>
 
-                                    <select class="form-control form-control-lg" id="equipeVisitante"
-                                        name="equipeVisitante" placeholder="Nome da equipe visitante" required>
-                                        <option value="">Selecione a equipe</option>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">
+                                        Equipe Visitante
+                                    </label>
+                                    <select type="text" class="form-control " name="equipeVisitante" required>
                                         <?= EquipeController::getEquipesOptions() ?>
                                     </select>
-                                    <!-- 
-                                        <input type="text" class="form-control form-control-lg" id="equipeVisitante"
-                                            name="equipeVisitante" placeholder="Nome da equipe visitante" required> -->
                                     <div class="invalid-feedback">
                                         Por favor, informe a equipe visitante.
                                     </div>
                                 </div>
-
-                                <!-- Seção: Detalhes do Confronto -->
-                                <div class="col-12 mt-5">
-                                    <h4 class="fw-bold text-success mb-3">
-                                        <i class="bi bi-info-circle-fill me-2"></i>Detalhes do Confronto
-                                    </h4>
-                                </div>
-
-                                <!-- Tipo de Confronto -->
-                                <div class="col-md-6">
-                                    <label for="tipoConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-flag me-2 text-success"></i>Tipo de Confronto *
+                                <div class="col-md-2">
+                                    <label class="form-label fw-semibold">
+                                        Gols
                                     </label>
-                                    <select class="form-select form-select-lg" id="tipoConfronto" name="tipoConfronto"
-                                        required>
-                                        <option value="">Selecione o tipo</option>
-                                        <option value="campeonato">Campeonato</option>
-                                        <option value="amistoso">Amistoso</option>
-                                        <option value="copa">Copa</option>
-                                        <option value="torneio">Torneio</option>
+                                    <select type="text" class="form-control  form-control-lg" name="golsEquipePerdedora" required>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                        Por favor, selecione o tipo de confronto.
+                                        Por favor, informe os gols da equipe que perdeu.
                                     </div>
                                 </div>
 
-                                <!-- Data do Confronto -->
-                                <div class="col-md-6">
-                                    <label for="dataConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-calendar3 me-2 text-success"></i>Data do Confronto *
-                                    </label>
-                                    <input type="date" class="form-control form-control-lg" id="dataConfronto"
-                                        name="dataConfronto" required>
-                                    <div class="invalid-feedback">
-                                        Por favor, informe a data do confronto.
-                                    </div>
-                                </div>
+                            </div>
 
-                                <!-- Hora do Confronto -->
-                                <div class="col-md-6">
-                                    <label for="horaConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-clock-fill me-2 text-success"></i>Hora do Confronto *
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">
+                                        Equipe Vencedora
                                     </label>
-                                    <input type="time" class="form-control form-control-lg" id="horaConfronto"
-                                        name="horaConfronto" required>
-                                    <div class="invalid-feedback">
-                                        Por favor, informe a hora do confronto.
-                                    </div>
-                                </div>
-
-                                <!-- Status do Confronto -->
-                                <div class="col-md-6">
-                                    <label for="statusConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-hourglass-split me-2 text-success"></i>Status do Confronto *
-                                    </label>
-                                    <select class="form-select form-select-lg" id="statusConfronto"
-                                        name="statusConfronto" required>
-                                        <option value="">Selecione o status</option>
-                                        <option value="realizado">Realizado</option>
-                                        <option value="agendado">Agendado</option>
+                                    <select type="text" class="form-control " name="equipeVitoriosa" required>
+                                        <option value=""></option>
+                                        <option value="Empate">Empate</option>
+                                        <option value="mandante">Mandante</option>
+                                        <option value="visitante">Visitante</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                        Por favor, selecione o status do confronto.
+                                        Por favor, informe a equipe que venceu.
                                     </div>
                                 </div>
 
-                                <!-- Seção: Local -->
-                                <div class="col-12 mt-5">
-                                    <h4 class="fw-bold text-success mb-3">
-                                        <i class="bi bi-geo-alt-fill me-2"></i>Local do Confronto
-                                    </h4>
-                                </div>
-
-                                <!-- Logradouro -->
-                                <div class="col-12">
-                                    <label for="logradouroConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-geo-alt me-2 text-success"></i>Logradouro *
+                                <div class="col-md-8">
+                                    <label for="logradouro" class="form-label fw-semibold">
+                                        Rua, Bairro ou Comunidade
                                     </label>
-                                    <input type="text" class="form-control form-control-lg" id="logradouroConfronto"
-                                        name="logradouroConfronto" placeholder="Endereço do campo/estádio" required>
+                                    <input type="text" class="form-control form-control-lg" id="logradouro"
+                                        name="logradouro" placeholder="Rua, Avenida, etc." required>
                                     <div class="invalid-feedback">
                                         Por favor, informe o logradouro.
                                     </div>
                                 </div>
 
-                                <!-- Cidade e Estado -->
-                                <div class="col-md-8">
-                                    <label for="cidadeConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-building me-2 text-success"></i>Cidade *
+                            </div>
+
+                            <div class="row mb-4">
+
+                                <div class="col-md-6">
+                                    <label for="cidade" class="form-label fw-semibold">Cidade
                                     </label>
-                                    <input type="text" class="form-control form-control-lg" id="cidadeConfronto"
-                                        name="cidadeConfronto" required>
+                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade"
+                                        required>
                                     <div class="invalid-feedback">
                                         Por favor, informe a cidade.
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label for="estadoConfronto" class="form-label fw-semibold">
-                                        <i class="bi bi-map me-2 text-success"></i>Estado *
+                                <div class="col-md-6">
+                                    <label for="estado" class="form-label fw-semibold">
+                                        Estado
                                     </label>
-                                    <select class="form-select form-select-lg" id="estadoConfronto"
-                                        name="estadoConfronto" required>
+                                    <select class="form-select form-select-lg" id="estado" name="estado" required>
                                         <option value="">Selecione</option>
                                         <option value="AC">Acre</option>
                                         <option value="AL">Alagoas</option>
@@ -236,68 +205,36 @@ use App\Controllers\EquipeController;
                                         Por favor, selecione o estado.
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Seção: Resultado -->
-                                <div class="col-12 mt-5">
-                                    <h4 class="fw-bold text-success mb-3">
-                                        <i class="bi bi-trophy-fill me-2"></i>Resultado do Confronto
-                                    </h4>
-                                </div>
-
-                                <!-- Gols Equipe Mandante -->
-                                <div class="col-md-4">
-                                    <label for="golsMandante" class="form-label fw-semibold">
-                                        <i class="bi bi-house-fill me-2 text-success"></i>Gols Mandante *
+                            <div class="row mb-4">
+                                <div class="form-group col-md-6">
+                                    <label for="" class="form-label fw-semibold">
+                                        Data
                                     </label>
-                                    <input type="number" class="form-control form-control-lg" id="golsMandante"
-                                        name="golsMandante" min="0" max="50" required>
-                                    <div class="invalid-feedback">
-                                        Por favor, informe os gols da equipe mandante.
-                                    </div>
+                                    <input type="date" class="form-control" name="dataPartida">
                                 </div>
-
-                                <!-- VS -->
-                                <div class="col-md-4 d-flex align-items-end justify-content-center">
-                                    <div class="vs-container text-center mb-3">
-                                        <span class="vs-text fw-bold text-success fs-2">VS</span>
-                                    </div>
-                                </div>
-
-                                <!-- Gols Equipe Visitante -->
-                                <div class="col-md-4">
-                                    <label for="golsVisitante" class="form-label fw-semibold">
-                                        <i class="bi bi-airplane me-2 text-success"></i>Gols Visitante *
+                                <div class="form-group col-md-6">
+                                    <label for="" class="form-label fw-semibold">
+                                        Hora
                                     </label>
-                                    <input type="number" class="form-control form-control-lg" id="golsVisitante"
-                                        name="golsVisitante" min="0" max="50" required>
-                                    <div class="invalid-feedback">
-                                        Por favor, informe os gols da equipe visitante.
-                                    </div>
-                                </div>
-
-                                <!-- Resultado Automático -->
-                                <div class="col-12">
-                                    <div class="result-display bg-light p-4 rounded-3 text-center">
-                                        <h5 class="fw-bold mb-2">Resultado:</h5>
-                                        <div id="resultadoDisplay" class="fs-4 fw-bold text-success">
-                                            Preencha os gols para ver o resultado
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Buttons -->
-                                <div class="col-12 mt-5">
-                                    <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                                        <button type="submit" class="btn btn-success btn-lg px-5 py-3 fw-semibold">
-                                            <i class="bi bi-check-circle me-2"></i>Cadastrar Confronto
-                                        </button>
-                                        <a href="<?= BASE_URL ?>/inicio"
-                                            class="btn btn-outline-secondary btn-lg px-5 py-3 fw-semibold">
-                                            <i class="bi bi-arrow-left me-2"></i>Cancelar
-                                        </a>
-                                    </div>
+                                    <input type="time" class="form-control" name="horaPartida">
                                 </div>
                             </div>
+
+                            <!-- Buttons -->
+                            <div class="col-12 mt-5">
+                                <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                                    <button type="submit" class="btn btn-success btn-lg px-5 py-3 fw-semibold">
+                                        <i class="bi bi-check-circle me-2"></i>Cadastrar Confronto
+                                    </button>
+                                    <a href="<?= BASE_URL ?>/inicio"
+                                        class="btn btn-outline-secondary btn-lg px-5 py-3 fw-semibold">
+                                        <i class="bi bi-arrow-left me-2"></i>Cancelar
+                                    </a>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -305,41 +242,6 @@ use App\Controllers\EquipeController;
         </div>
     </main>
 
-    <!-- Success Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title" id="successModalLabel">
-                        <i class="bi bi-check-circle-fill me-2"></i>Confronto Cadastrado!
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <div class="mb-3">
-                        <i class="bi bi-calendar-event text-success" style="font-size: 3rem;"></i>
-                    </div>
-                    <h6 class="fw-bold mb-3">Confronto Registrado!</h6>
-                    <p class="text-muted mb-3" id="modalResultado">
-                        O confronto foi cadastrado com sucesso na plataforma FutPlay.
-                    </p>
-                    <div class="alert alert-success" role="alert">
-                        <i class="bi bi-info-circle me-2"></i>
-                        O resultado será exibido na página inicial da plataforma.
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <a href="<?= BASE_URL ?>/inicio" class="btn btn-success px-4">
-                        <i class="bi bi-house-fill me-2"></i>Voltar ao Início
-                    </a>
-                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
-                        Cadastrar Outro Confronto
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer-bg text-white py-5 mt-5">
@@ -421,9 +323,10 @@ use App\Controllers\EquipeController;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="public/assets/js/script.js"></script>
-    <script src="public/assets/js/cadastro.js"></script>
-    <script src="public/assets/js/confronto.js"></script>
+    <!-- <script src="public/assets/js/scrip
+     t.js"></script> -->
+    <!-- <script src="public/assets/js/cadastro.js"></script> -->
+    <!-- <script src="public/assets/js/confronto.js"></script> -->
 </body>
 
 </html>

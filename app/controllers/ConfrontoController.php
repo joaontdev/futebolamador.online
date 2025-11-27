@@ -20,64 +20,55 @@ class ConfrontoController
      */
     public function salvar()
     {
-        // --- 1. CONFIGURAÇÃO DE SAÍDA ---
-        header('Content-Type: application/json');
 
-        // --- 2. COLETA DE DADOS ---
         $data = [
-            'equipeMandante'        => (int) ($_POST['equipeMandante'] ?? 0),
-            'equipeVisitante'       => (int) ($_POST['equipeVisitante'] ?? 0),
-            'tipoConfronto'         => $_POST['tipoConfronto'] ?? '',
-            'dataConfronto'         => $_POST['dataConfronto'] ?? '',
-            'horaConfronto'         => $_POST['horaConfronto'] ?? '',
-            'statusConfronto'       => $_POST['statusConfronto'] ?? 'Agendado', // Define 'Agendado' como padrão
-            'logradouroConfronto'   => $_POST['logradouroConfronto'] ?? '',
-            'cidadeConfronto'       => $_POST['cidadeConfronto'] ?? '',
-            'estadoConfronto'       => $_POST['estadoConfronto'] ?? '',
-            'golsMandante'          => (int) ($_POST['golsMandante'] ?? 0),
-            'golsVisitante'         => (int) ($_POST['golsVisitante'] ?? 0),
+            'equipeMandante'            => $_POST['equipeMandante'],
+            'golsEquipeVitoriosa'       => $_POST['golsEquipeVitoriosa'],
+            'equipeVisitante'           => $_POST['equipeVisitante'],
+            'golsEquipePerdedora'       => $_POST['golsEquipePerdedora'],
+            'equipeVitoriosa'           => $_POST['equipeVitoriosa'],
+            'logradouro'                => $_POST['logradouro'],
+            'cidade'                    => $_POST['cidade'],
+            'estado'                    => $_POST['estado'],
+            'dataPartida'               => $_POST['dataPartida'],
+            'horaPartida'               => $_POST['horaPartida']
         ];
 
+
+
         try {
-            // 3. Tenta Criar e Inserir
-
-            // Cria uma nova instância do Confronto.
             $confronto = new Confronto($data);
-
-            // 4. Tenta inserir no banco de dados.
             if ($confronto->insert()) {
-                // Sucesso
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Confronto agendado com sucesso!',
-                ]);
+                \header("Location: " . BASE_URL . "/sucesso-no-cadastro-de-confronto");
+                exit;
             } else {
-                // Falha na inserção (insert() retornou false)
-                http_response_code(500);
-                echo json_encode([
-                    'success' => false,
-                    'message' => 'Erro ao agendar o confronto. Verifique as IDs das equipes.',
-                ]);
+                \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+                exit;
             }
         } catch (\PDOException $e) {
+
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
             // 5. CAPTURA ERROS DE BANCO DE DADOS (Ex: Chave estrangeira inválida)
-            http_response_code(500);
-            error_log("Erro de PDO no Confronto: " . $e->getMessage());
-            echo json_encode([
-                'success' => false,
-                'message' => 'Erro no banco de dados. Certifique-se de que as equipes selecionadas existem.',
-            ]);
+            // http_response_code(500);
+            // error_log("Erro de PDO no Confronto: " . $e->getMessage());
+            // echo json_encode([
+            //     'success' => false,
+            //     'message' => 'Erro no banco de dados. Certifique-se de que as equipes selecionadas existem.',
+            // ]);
         } catch (\Exception $e) {
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
             // 6. CAPTURA OUTROS ERROS
-            http_response_code(500);
-            error_log("Erro geral no Confronto: " . $e->getMessage());
-            echo json_encode([
-                'success' => false,
-                'message' => 'Ocorreu um erro interno inesperado ao agendar o confronto.',
-            ]);
+            // http_response_code(500);
+            // error_log("Erro geral no Confronto: " . $e->getMessage());
+            // echo json_encode([
+            //     'success' => false,
+            //     'message' => 'Ocorreu um erro interno inesperado ao agendar o confronto.',
+            // ]);
         }
 
         // Finaliza a execução
-        exit;
+        // exit;
     }
 }
