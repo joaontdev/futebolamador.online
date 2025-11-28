@@ -6,6 +6,7 @@
 $routes = [
     '/'                     => __DIR__ . '/views/landingpage.php',
     '/inicio'               => __DIR__ . '/views/landingpage.php',
+    '/confrontos'           => __DIR__ . '/views/feed-confrontos.php',
     '/equipes-cadastradas'  => __DIR__ . '/views/equipes-cadastradas.php',
     '/nova-equipe'          => __DIR__ . '/views/cadastro-equipe.php',
     '/novo-confronto'       => __DIR__ . '/views/cadastro-confronto.php',
@@ -17,8 +18,8 @@ $routes = [
         "controller"        => "ConfrontoController",
         "method"            => "salvar",
     ],
-      '/sucesso-no-cadastro-de-confronto'       => __DIR__ . '/views/partials/pagina-cadastrado-com-sucesso.php',
-      '/erro-no-cadastro-de-confronto'       => __DIR__ . '/views/partials/pagina-informacao-erro.php',
+    '/sucesso-no-cadastro-de-confronto'    => __DIR__ . '/views/partials/pagina-cadastrado-com-sucesso.php',
+    '/erro-no-cadastro-de-confronto'       => __DIR__ . '/views/partials/pagina-informacao-erro.php',
 
 ];
 

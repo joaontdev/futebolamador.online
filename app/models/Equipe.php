@@ -92,7 +92,7 @@ class Equipe
         }
     }
 
-    
+
     public function getEquipes(): array
     {
         $pdo = Database::getConnection();
@@ -118,11 +118,19 @@ class Equipe
                 'createdAt' => $equipe->created_at,
                 'updatedAt' => $equipe->updated_at
             ];
-
         }
 
         return $equipes;
     }
 
+    public function getById($id)
+    {
+        $pdo = Database::getConnection();
 
+        $sql = "SELECT * FROM equipes WHERE id = " . $id;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchObject();
+    }
 }

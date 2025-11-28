@@ -123,4 +123,39 @@ class Confronto
             return false;
         }
     }
+
+
+
+    public function getConfrontos(): array
+    {
+        $pdo        =   Database::getConnection();
+        $confrontos =   [];
+
+        $sql    =   "SELECT * FROM confrontos ORDER BY id DESC";
+        $stmt   =   $pdo->prepare($sql);
+        $stmt->execute();
+
+        while ($confronto = $stmt->fetchObject()) {
+
+            $equipeMandante     =   (new Equipe([]))->getById($confronto->id_equipe_mandante);
+            $equipeVisitante    =   (new Equipe([]))->getById($confronto->id_equipe_visitante);
+
+            $confrontos[] = [
+                'id_equipe_mandante'    =>  $confronto->id_equipe_mandante,
+                'gols_equipe_mandante'  =>  $confronto->gols_equipe_mandante,
+                'id_equipe_visitante'   =>  $confronto->id_equipe_visitante,
+                'gols_equipe_visitante' =>  $confronto->gols_equipe_visitante,
+                'resultadoPartida'      =>  $confronto->resultadoPartida,
+                'logradouro'            =>  $confronto->logradouro,
+                'cidade'                =>  $confronto->cidade,
+                'estado'                =>  $confronto->estado,
+                'data_partida'          =>  $confronto->data_partida,
+                'hora_partida'          =>  $confronto->hora_partida,
+                'equipe_mandante'       =>  $equipeMandante,
+                'equipe_visitante'      =>  $equipeVisitante,
+            ];
+        }
+
+        return $confrontos;
+    }
 }

@@ -9,15 +9,10 @@ require_once __DIR__ . '/../core/Database.php';
 
 use App\Models\Confronto;
 
-/**
- * Classe responsável por lidar com a lógica de negócio dos Confrontos (Jogos).
- */
+
 class ConfrontoController
 {
-    /**
-     * Processa a submissão de dados do formulário de confronto (POST)
-     * e insere o registro no banco de dados.
-     */
+
     public function salvar()
     {
 
@@ -34,8 +29,6 @@ class ConfrontoController
             'horaPartida'               => $_POST['horaPartida']
         ];
 
-
-
         try {
             $confronto = new Confronto($data);
             if ($confronto->insert()) {
@@ -49,26 +42,53 @@ class ConfrontoController
 
             \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
             exit;
-            // 5. CAPTURA ERROS DE BANCO DE DADOS (Ex: Chave estrangeira inválida)
-            // http_response_code(500);
-            // error_log("Erro de PDO no Confronto: " . $e->getMessage());
-            // echo json_encode([
-            //     'success' => false,
-            //     'message' => 'Erro no banco de dados. Certifique-se de que as equipes selecionadas existem.',
-            // ]);
         } catch (\Exception $e) {
             \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
             exit;
-            // 6. CAPTURA OUTROS ERROS
-            // http_response_code(500);
-            // error_log("Erro geral no Confronto: " . $e->getMessage());
-            // echo json_encode([
-            //     'success' => false,
-            //     'message' => 'Ocorreu um erro interno inesperado ao agendar o confronto.',
-            // ]);
+        }
+    }
+
+    public static function todosOsConfrontos()
+    {
+
+        $confronto = new Confronto([]);
+        $confrontos = $confronto->getConfrontos();
+
+        $list = "";
+        foreach ($confrontos as $key => $confronto) {
+            # code...
+
+            $list .= '<li class="list-group-item">
+        <p class="text-center mt-3"> ' . $confronto['logradouro'] . ' ' . $confronto['cidade'] . ' ' . $confronto['estado'] . ' <strong>' . $confronto['data_partida'] . ' as ' . $confronto['hora_partida'] . '</strong> </p>
+
+        <div class="justify-content-evenly w-100">
+        <div class="row">
+        <div class="col-4 text-center">
+        ' . ($confronto['equipe_mandante']->nome_equipe ?? "") . '
+        </div>
+        <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
+        ' . $confronto['gols_equipe_mandante'] . '
+        </div>
+        <div class="col-2 d-flex justify-content-center align-items-center text-center">
+        <i class="bi bi-x-lg m-0"></i>
+        </div>
+        <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
+        ' . $confronto['gols_equipe_visitante'] . '
+        </div>
+        <div class="col-4 text-center">
+        ' . ($confronto['equipe_visitante']->nome_equipe ?? "") . '
+        </div>
+        </div>
+        </div>
+
+        <p class="text-center text-success mt-3"><strong>' . $confronto['resultadoPartida'] . '</strong></p>
+        </li>';
         }
 
-        // Finaliza a execução
-        // exit;
+        if (empty($list)) {
+            $list = "Nenhum confronto encontrado.";
+        }
+
+        return $list;
     }
 }

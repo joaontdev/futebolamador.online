@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= BASE_URL ?>/app/views/feed-confrontos.html">Feed de confrontos</a>
+                    <a class="nav-link" href="<?= BASE_URL ?>/confrontos">Feed de confrontos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= BASE_URL ?>/equipes-cadastradas">Equipes Cadastradas</a>
