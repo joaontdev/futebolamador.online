@@ -133,6 +133,7 @@ use App\Controllers\EquipeController;
                                     </label>
                                     <select type="text" class="form-control " name="equipeVitoriosa" required>
                                         <option value=""></option>
+                                        <option value="Aguardando">Aguardando</option>
                                         <option value="Empate">Empate</option>
                                         <option value="mandante">Mandante</option>
                                         <option value="visitante">Visitante</option>
