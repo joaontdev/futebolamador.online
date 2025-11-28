@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '../../controllers/ConfrontoController.php';
+use App\Controllers\ConfrontoController;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -21,9 +26,6 @@
 <body>
     <?php
     // Inclui a nav bar da pasta partials
-
-    use App\Controllers\ConfrontoController;
-
     require_once __DIR__ . '/../views/partials/navbar.php';
 
     ?>
