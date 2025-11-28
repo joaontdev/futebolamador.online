@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 // --- Contorno do Autoloader: Incluindo dependências manualmente ---
 // Garante que o Modelo Confronto e a Conexão Database estejam carregados.
+require_once __DIR__ . '/../models/Equipe.php';
 require_once __DIR__ . '/../models/Confronto.php';
 require_once __DIR__ . '/../core/Database.php';
 
