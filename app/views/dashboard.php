@@ -11,6 +11,8 @@ require_once __DIR__ . '../../controllers/EquipeController.php';
 
 use App\Controllers\EquipeController;
 
+require_once __DIR__ . '../../controllers/ConfrontoController.php';
+
 
 ?>
 
@@ -98,7 +100,7 @@ use App\Controllers\EquipeController;
                 </thead>
                 <tbody id="tableBody">
 
-                <?= ConfrontoController::listarConfrontosDashboard() ?>
+                    <?= ConfrontoController::listarConfrontosDashboard() ?>
 
                     <tr class="row-success">
                         <td>1</td>
