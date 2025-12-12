@@ -20,7 +20,26 @@ $routes = [
     ],
     '/sucesso-no-cadastro-de-confronto'    => __DIR__ . '/views/partials/pagina-cadastrado-com-sucesso.php',
     '/erro-no-cadastro-de-confronto'       => __DIR__ . '/views/partials/pagina-informacao-erro.php',
-
+    '/login'                               => __DIR__ . '/views/login.php',
+    '/login/acessar'                       => [
+        "controller"        => "LoginController",
+        "method"            => "acessar",
+    ],
+    '/login/logout'                       => [
+        "controller"        => "LoginController",
+        "method"            => "logout",
+    ],
+    '/dashboard'            => __DIR__ . '/views/dashboard.php',
+    '/edicao-equipe'        => __DIR__ . '/views/edicao-equipe.php',
+    '/edicao-equipe/salvar' =>  [
+        "controller"        => "EquipeController",
+        "method"            => "editar",
+    ],
+    '/edicao-de-confronto'                  => __DIR__ . '/views/edicao-confronto.php',
+    '/edicao-de-confronto/atualizar'        => [
+        "controller"        => "ConfrontoController",
+        "method"            => "atualizar",
+    ],
 ];
 
 // Função que processa a rota

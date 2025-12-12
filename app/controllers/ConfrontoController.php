@@ -92,4 +92,181 @@ class ConfrontoController
 
         return $list;
     }
+
+
+    public static function listarConfrontosDashboard()
+    {
+
+        $confronto = new Confronto([]);
+        $confrontos = $confronto->getConfrontos();
+
+        $list = "";
+        foreach ($confrontos as $key => $confronto) {
+            # code...
+
+            $list .=   '<tr class="row-success">
+                    <td>' . $confronto['id'] . '</td>
+                    <td>' . $confronto['equipe_mandante']->nome_equipe . '</td>
+                    <td>' . $confronto['gols_equipe_mandante'] . '</td>
+                    <td>' . $confronto['equipe_visitante']->nome_equipe . '</td>
+                    <td>' . $confronto['gols_equipe_visitante'] . '</td>
+                    <td>' . $confronto['resultadoPartida'] . '</td>
+                    <td>' . $confronto['logradouro'] . '</td>
+                    <td>' . $confronto['cidade'] . '</td>
+                    <td>' . $confronto['estado'] . '</td>
+                    <td>' . $confronto['data_partida'] . '</td>
+                    <td>' . $confronto['hora_partida'] . '</td>
+                    <td class="text-end">
+                    <a role="button" href="' . BASE_URL . '/edicao-de-confronto?id=' . $confronto['id'] . '" class="btn btn-sm btn-outline-success btn-edit"><i class="bi bi-pencil"></i> Editar</a>
+                    </td>
+                    </tr>';
+        }
+
+        if (empty($list)) {
+            $list = '<tr><td colspan="8" class="text-center">Nenhum confronto encontrado.</td></tr>';
+        }
+
+        return $list;
+    }
+
+
+    public function getConfrontoById($id)
+    {
+        // Lógica para editar um confronto
+        $confrontoModel = new Confronto([]);
+        return $confrontoModel->getConfrontoById($id);
+    }
+
+    /**
+     * Gera options numéricos de 0 a 10.
+     *
+     * @param int|null $selected Valor que deve ficar selecionado (0–10). Opcional.
+     * @return string HTML das options
+     */
+    public static function gerarOptionsZeroADez(int $selected = null): string
+    {
+        $html = "";
+
+        for ($i = 0; $i <= 10; $i++) {
+            $isSelected = ($selected !== null && $selected == $i) ? " selected" : "";
+            $html .= "<option value=\"{$i}\"{$isSelected}>{$i}</option>\n";
+        }
+
+        return $html;
+    }
+
+    /**
+     * Gera opções de resultado de partida.
+     *
+     * @param string|null $selected Valor que deve ficar selecionado. Opcional.
+     * @return string HTML das options
+     */
+    public static function gerarOptionsResultado(?string $selected = null): string
+    {
+        $opcoes = [
+            "Aguardando" => "Aguardando",
+            "Empate"     => "Empate",
+            "mandante"   => "Mandante",
+            "visitante"  => "Visitante",
+        ];
+
+        $html = "";
+
+        foreach ($opcoes as $valor => $label) {
+            $isSelected = ($selected !== null && $selected === $valor) ? " selected" : "";
+            $html .= "<option value=\"{$valor}\"{$isSelected}>{$label}</option>\n";
+        }
+
+        return $html;
+    }
+
+    /**
+     * Gera options de estados brasileiros.
+     *
+     * @param string|null $selected Sigla do estado que deve ficar selecionado. Opcional.
+     * @return string HTML das options
+     */
+    public static function gerarOptionsEstados(?string $selected = null): string
+    {
+        $estados = [
+            ""  => "Selecione",
+            "AC" => "Acre",
+            "AL" => "Alagoas",
+            "AP" => "Amapá",
+            "AM" => "Amazonas",
+            "BA" => "Bahia",
+            "CE" => "Ceará",
+            "DF" => "Distrito Federal",
+            "ES" => "Espírito Santo",
+            "GO" => "Goiás",
+            "MA" => "Maranhão",
+            "MT" => "Mato Grosso",
+            "MS" => "Mato Grosso do Sul",
+            "MG" => "Minas Gerais",
+            "PA" => "Pará",
+            "PB" => "Paraíba",
+            "PR" => "Paraná",
+            "PE" => "Pernambuco",
+            "PI" => "Piauí",
+            "RJ" => "Rio de Janeiro",
+            "RN" => "Rio Grande do Norte",
+            "RS" => "Rio Grande do Sul",
+            "RO" => "Rondônia",
+            "RR" => "Roraima",
+            "SC" => "Santa Catarina",
+            "SP" => "São Paulo",
+            "SE" => "Sergipe",
+            "TO" => "Tocantins"
+        ];
+
+        $html = "";
+
+        foreach ($estados as $sigla => $nome) {
+            $isSelected = ($selected !== null && $selected === $sigla) ? " selected" : "";
+            $html .= "<option value=\"{$sigla}\"{$isSelected}>{$nome}</option>\n";
+        }
+
+        return $html;
+    }
+
+
+
+
+    public function atualizar()
+    {
+        // Dados vindos do formulário
+        $data = $_POST; // ou $_REQUEST
+
+        // Validação simples
+        if (empty($data['id_confronto'])) {
+            // die("ID do confronto não informado.");
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
+        }
+
+        // Busca o confronto existente
+        $confrontoModel = new Confronto();
+        $confrontoExistente = $confrontoModel->getConfrontoById($data['id_confronto']);
+
+        if (!$confrontoExistente) {
+            // die("Confronto não encontrado.");
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
+        }
+
+        // Cria um novo objeto Confronto com os dados do formulário
+        $confronto = new Confronto($data);
+
+        // Define o ID para atualizar
+        $confronto->id = (int) $data['id_confronto'];
+
+        // Chama a função de atualização
+        if ($confronto->update()) {
+            \header("Location: " . BASE_URL . "/sucesso-no-cadastro-de-confronto");
+            exit;
+        } else {
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
+        }
+    }
 }

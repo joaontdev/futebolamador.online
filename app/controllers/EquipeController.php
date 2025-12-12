@@ -138,23 +138,94 @@ class EquipeController
     }
 
 
-    // Função que retornara uma string options de equipes cadastradas
-    public static function getEquipesOptions()
+    // Função que retornará uma string de <option> com as equipes cadastradas.
+    // Se $idSelecionado for informado, deixa a opção correspondente selecionada.
+    public static function getEquipesOptions(int $idSelecionado = null)
     {
-
         $lista = "";
 
+        // Instância da classe Equipe
+        $equipe = new Equipe([]);
+        $equipes = $equipe->getEquipes();
+
+        foreach ($equipes as $e) {
+
+            // Verifica se é a equipe selecionada
+            $selected = ($idSelecionado !== null && $idSelecionado == $e['id']) ? " selected" : "";
+
+            // Cria a option HTML
+            $lista .= "<option value=\"{$e['id']}\"{$selected}>{$e['nomeEquipe']}</option>";
+        }
+
+        return $lista;
+    }
+
+
+
+    public static function listarEquipesDashboard()
+    {
+
+        $tr = "";
+
+        $equipe = new Equipe([]);
+        $equipes = $equipe->getEquipes();
+
+        foreach ($equipes as $equipe) {
+
+            $tr .=  '<tr>
+                <td>' . $equipe['id'] . '</td>
+                <td>' . $equipe['nomeEquipe'] . '</td>
+                <td>' . $equipe['logradouro'] . '</td>
+                <td>' . $equipe['cidade'] . '</td>
+                <td>' . $equipe['estado'] . '</td>
+                <td>' . $equipe['anoFundacao'] . '</td>
+                <td>' . $equipe['nomeComandante'] . '</td>
+                <td><span class="badge bg-warning text-dark">' . $equipe['status'] . '</span></td>
+                <td><span class="badge bg-danger-light" style="background-color: rgba(220,53,69,0.08); color:#dc3545; border:1px solid rgba(220,53,69,0.12);">' . $equipe['isDeleted'] . '</span></td>
+                <td>' . $equipe['createdAt'] . '</td>
+                <td>' . $equipe['updatedAt'] . '</td>
+                <td class="text-end">
+                <a role="button" href="' . BASE_URL . '/edicao-equipe?id=' . $equipe['id'] . '" class="btn btn-sm btn-outline-success btn-edit"><i class="bi bi-pencil"></i> Editar</button>
+                </td>
+                </tr>';
+        }
+
+        return $tr;
+    }
+
+    public static function buscarPorId($id)
+    {
         // Cria uma nova instância da Equipe.
         // Se o Autoloader falhar AQUI, o erro Fatal ainda acontecerá, 
         // mas assumimos que o Autoloader está funcionando após as correções no composer.json.
         $equipe = new Equipe([]);
-        $equipes = $equipe->getEquipes();
+        return $equipe->getEquipeById($id);
+    }
 
+    public function editar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        foreach ($equipes as $equipe) {
-            // Crie options html
-            $lista .= "<option value=\"" . $equipe['id'] . "\">" . $equipe['nomeEquipe'] . "</option>";
+            $data = [
+                // Usa o operador de coalescência null (??) para evitar "Undefined index"
+                'nomeEquipe'        =>  $_POST['nomeEquipe']        ?? '',
+                'logradouro'        =>  $_POST['logradouro']        ?? '',
+                'cidade'            =>  $_POST['cidade']            ?? '',
+                'estado'            =>  $_POST['estado']            ?? '',
+                // O cast (int) garante que o valor seja um número, evitando erros de tipo
+                'anoFundacao'       =>  (int) ($_POST['anoFundacao'] ?? 0),
+                'nomeComandante'    =>  $_POST['nomeComandante']    ?? '',
+            ];
+
+            $equipe = new Equipe($data);
+            $equipe->id = (int) ($_POST['idEquipe'] ?? 0);
+            if ($equipe->update()) {
+                \header("Location: " . BASE_URL . "/dashboard");
+                exit;
+            }
+
+            header("Location: " . BASE_URL . "/edicao-equipe?id=" . $equipe->id . "");
+            exit;
         }
-        return $lista;
     }
 }

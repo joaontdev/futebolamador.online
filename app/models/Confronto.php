@@ -137,10 +137,11 @@ class Confronto
 
         while ($confronto = $stmt->fetchObject()) {
 
-            $equipeMandante     =   (new Equipe([]))->getById($confronto->id_equipe_mandante);
-            $equipeVisitante    =   (new Equipe([]))->getById($confronto->id_equipe_visitante);
+            $equipeMandante     =   (new Equipe([]))->getEquipeById($confronto->id_equipe_mandante);
+            $equipeVisitante    =   (new Equipe([]))->getEquipeById($confronto->id_equipe_visitante);
 
             $confrontos[] = [
+                'id'                    =>  $confronto->id,
                 'id_equipe_mandante'    =>  $confronto->id_equipe_mandante,
                 'gols_equipe_mandante'  =>  $confronto->gols_equipe_mandante,
                 'id_equipe_visitante'   =>  $confronto->id_equipe_visitante,
@@ -157,5 +158,68 @@ class Confronto
         }
 
         return $confrontos;
+    }
+
+    public function getConfrontoById($id)
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT * FROM confrontos WHERE id = " . $id;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchObject();
+    }
+
+    /**
+     * Atualiza os dados de um confronto existente no banco de dados.
+     * @return bool True em caso de sucesso, false em caso de falha.
+     */
+    public function update(): bool
+    {
+        if (!isset($this->id)) {
+            throw new \Exception("ID do confronto não definido para atualização.");
+        }
+
+        // Carrega a classe Database caso necessário
+        if (!class_exists('App\Core\Database')) {
+            require_once __DIR__ . '/../core/Database.php';
+        }
+
+        $pdo = \App\Core\Database::getConnection();
+
+        $sql = "UPDATE confrontos SET
+                id_equipe_mandante      = :id_equipe_mandante,
+                gols_equipe_mandante    = :gols_equipe_mandante,
+                id_equipe_visitante     = :id_equipe_visitante,
+                gols_equipe_visitante   = :gols_equipe_visitante,
+                resultadoPartida        = :resultadoPartida,
+                logradouro              = :logradouro,
+                cidade                  = :cidade,
+                estado                  = :estado,
+                data_partida            = :data_partida,
+                hora_partida            = :hora_partida
+            WHERE id = :id";
+
+        try {
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->bindValue(':id_equipe_mandante', $this->id_equipe_mandante, PDO::PARAM_INT);
+            $stmt->bindValue(':gols_equipe_mandante', $this->gols_equipe_mandante, PDO::PARAM_INT);
+            $stmt->bindValue(':id_equipe_visitante', $this->id_equipe_visitante, PDO::PARAM_INT);
+            $stmt->bindValue(':gols_equipe_visitante', $this->gols_equipe_visitante, PDO::PARAM_INT);
+            $stmt->bindValue(':resultadoPartida', $this->resultadoPartida, PDO::PARAM_STR);
+            $stmt->bindValue(':logradouro', $this->logradouro, PDO::PARAM_STR);
+            $stmt->bindValue(':cidade', $this->cidade, PDO::PARAM_STR);
+            $stmt->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+            $stmt->bindValue(':data_partida', $this->data_partida, PDO::PARAM_STR);
+            $stmt->bindValue(':hora_partida', $this->hora_partida, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erro ao atualizar Confronto: " . $e->getMessage());
+            return false;
+        }
     }
 }

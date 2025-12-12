@@ -123,7 +123,7 @@ class Equipe
         return $equipes;
     }
 
-    public function getById($id)
+    public function getEquipeById($id)
     {
         $pdo = Database::getConnection();
 
@@ -133,4 +133,57 @@ class Equipe
 
         return $stmt->fetchObject();
     }
+
+    /**
+ * Atualiza o registro da equipe no banco de dados.
+ * @return bool True em caso de sucesso, false em caso de falha.
+ */
+public function update(): bool
+{
+    // Garante que existe um ID para atualização
+    if (empty($this->id)) {
+        return false;
+    }
+
+    $pdo = Database::getConnection();
+
+    $sql = "UPDATE equipes SET
+                nome_equipe      = :nome_equipe,
+                logradouro       = :logradouro,
+                cidade           = :cidade,
+                estado           = :estado,
+                ano_fundacao     = :ano_fundacao,
+                nome_comandante  = :nome_comandante,
+                status           = :status,
+                is_deleted       = :is_deleted,
+                updated_at       = NOW()
+            WHERE id = :id
+              AND is_deleted = 0";
+
+    try {
+        $stmt = $pdo->prepare($sql);
+
+        // Dados da equipe
+        $stmt->bindValue(':nome_equipe', $this->nomeEquipe, PDO::PARAM_STR);
+        $stmt->bindValue(':logradouro', $this->logradouro, PDO::PARAM_STR);
+        $stmt->bindValue(':cidade', $this->cidade, PDO::PARAM_STR);
+        $stmt->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+        $stmt->bindValue(':ano_fundacao', $this->anoFundacao, PDO::PARAM_INT);
+        $stmt->bindValue(':nome_comandante', $this->nomeComandante, PDO::PARAM_STR);
+
+        // Colunas de controle
+        $stmt->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $stmt->bindValue(':is_deleted', $this->isDeleted, PDO::PARAM_INT);
+
+        // Identificador
+        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        // Log em ambiente de desenvolvimento
+        error_log("Erro de atualização da Equipe (ID {$this->id}): " . $e->getMessage());
+        return false;
+    }
+}
+
 }
