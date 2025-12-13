@@ -73,6 +73,7 @@ class ConfrontoController
                 $styleResultado = "color: #28a745;";
             }
 
+            // 
             $list .= '<li class="list-group-item rounded-4 mb-2">
                             <p class="text-center mt-3 mb-3 fw-light" style="font-size: 0.9rem;">
                             <i class="bi bi-geo-alt"></i>
