@@ -74,7 +74,7 @@ class ConfrontoController
             }
 
             $list .= '<li class="list-group-item rounded-4 mb-2">
-                            <p class="text-center mt-3 mb-3 text-secondary fw-lighter">
+                            <p class="text-center mt-3 mb-3 fw-light" style="font-size: 0.9rem;">
                             <i class="bi bi-geo-alt"></i>
                             ' . $local . '
                             <i class="bi bi-dot"></i> <strong>
@@ -82,7 +82,7 @@ class ConfrontoController
                             </strong></p>
                             <div class="justify-content-evenly w-100">
                                 <div class="row">
-                                    <div class="col-4 text-center fw-lighter">
+                                    <div class="col-4 d-flex justify-content-center align-items-center text-center fw-light">
                                         ' . ($confronto['equipe_mandante']->nome_equipe ?? "") . '
                                     </div>
                                     <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
@@ -94,12 +94,12 @@ class ConfrontoController
                                     <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
                                        ' . $confronto['gols_equipe_visitante'] . '
                                     </div>
-                                    <div class="col-4 text-center fw-lighter">
+                                    <div class="col-4 d-flex justify-content-center align-items-center text-center fw-light">
                                         ' . ($confronto['equipe_visitante']->nome_equipe ?? "") . '
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-center mt-3" style="' . $styleResultado . '"><strong>' . $resultadoConfronto . '</strong></p>
+                            <p class="text-center mt-3" style="' . $styleResultado . ' font-size: 0.9rem;"><strong>' . $resultadoConfronto . '</strong></p>
                         </li>';
 
 
