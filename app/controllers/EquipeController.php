@@ -67,6 +67,7 @@ class EquipeController
             // 5. CAPTURA ERROS DE BANCO DE DADOS (Ex: Falha na conexão, Query SQL inválida)
             http_response_code(500);
             error_log("Erro de PDO: " . $e->getMessage()); // Loga o erro internamente
+            // Oi flor...
             echo json_encode([
                 'success' => false,
                 'message' => 'Erro de conexão ou query no banco de dados.',

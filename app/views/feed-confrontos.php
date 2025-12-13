@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '../../controllers/ConfrontoController.php';
+
 use App\Controllers\ConfrontoController;
 ?>
 

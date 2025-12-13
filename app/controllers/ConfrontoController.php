@@ -59,31 +59,76 @@ class ConfrontoController
         foreach ($confrontos as $key => $confronto) {
             # code...
 
-            $list .= '<li class="list-group-item">
-        <p class="text-center mt-3"> ' . $confronto['logradouro'] . ' ' . $confronto['cidade'] . ' ' . $confronto['estado'] . ' <strong>' . $confronto['data_partida'] . ' as ' . $confronto['hora_partida'] . '</strong> </p>
+            $local = $confronto['logradouro'] . ' ' . $confronto['cidade'] . ' ' . $confronto['estado'];
+            $data = \date_format(\date_create($confronto['data_partida']), 'd/m');
+            $hora = \date_format(\date_create($confronto['hora_partida']), 'H:i');
 
-        <div class="justify-content-evenly w-100">
-        <div class="row">
-        <div class="col-4 text-center">
-        ' . ($confronto['equipe_mandante']->nome_equipe ?? "") . '
-        </div>
-        <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
-        ' . $confronto['gols_equipe_mandante'] . '
-        </div>
-        <div class="col-2 d-flex justify-content-center align-items-center text-center">
-        <i class="bi bi-x-lg m-0"></i>
-        </div>
-        <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
-        ' . $confronto['gols_equipe_visitante'] . '
-        </div>
-        <div class="col-4 text-center">
-        ' . ($confronto['equipe_visitante']->nome_equipe ?? "") . '
-        </div>
-        </div>
-        </div>
+            $resultadoConfronto = "";
+            $styleResultado = "";
+            if ($confronto['resultadoPartida'] === 'Aguardando') {
+                $resultadoConfronto = 'Aguardando';
+                $styleResultado = "color: #6c757d;";
+            } else {
+                $resultadoConfronto = "Vitória da Equipe " . $confronto['resultadoPartida'];
+                $styleResultado = "color: #28a745;";
+            }
 
-        <p class="text-center text-success mt-3"><strong>' . $confronto['resultadoPartida'] . '</strong></p>
-        </li>';
+            $list .= '<li class="list-group-item rounded-4 mb-2">
+                            <p class="text-center mt-3 mb-3 text-secondary fw-lighter">
+                            <i class="bi bi-geo-alt"></i>
+                            ' . $local . '
+                            <i class="bi bi-dot"></i> <strong>
+                            ' . $data . ' as ' . $hora . '
+                            </strong></p>
+                            <div class="justify-content-evenly w-100">
+                                <div class="row">
+                                    <div class="col-4 text-center fw-lighter">
+                                        ' . ($confronto['equipe_mandante']->nome_equipe ?? "") . '
+                                    </div>
+                                    <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
+                                       ' . $confronto['gols_equipe_mandante'] . '
+                                    </div>
+                                    <div class="col-2 d-flex justify-content-center align-items-center text-center">
+                                        <i class="bi bi-x-lg m-0"></i>
+                                    </div>
+                                    <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
+                                       ' . $confronto['gols_equipe_visitante'] . '
+                                    </div>
+                                    <div class="col-4 text-center fw-lighter">
+                                        ' . ($confronto['equipe_visitante']->nome_equipe ?? "") . '
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3" style="' . $styleResultado . '"><strong>' . $resultadoConfronto . '</strong></p>
+                        </li>';
+
+
+
+            //     $list .= '<li class="list-group-item">
+            // <p class="text-center mt-3"> ' . $confronto['logradouro'] . ' ' . $confronto['cidade'] . ' ' . $confronto['estado'] . ' <strong>' . $confronto['data_partida'] . ' as ' . $confronto['hora_partida'] . '</strong> </p>
+
+            // <div class="justify-content-evenly w-100">
+            // <div class="row">
+            // <div class="col-4 text-center">
+            // ' . ($confronto['equipe_mandante']->nome_equipe ?? "") . '
+            // </div>
+            // <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
+            // ' . $confronto['gols_equipe_mandante'] . '
+            // </div>
+            // <div class="col-2 d-flex justify-content-center align-items-center text-center">
+            // <i class="bi bi-x-lg m-0"></i>
+            // </div>
+            // <div class="col-1 fw-bold d-flex justify-content-center align-items-center text-center">
+            // ' . $confronto['gols_equipe_visitante'] . '
+            // </div>
+            // <div class="col-4 text-center">
+            // ' . ($confronto['equipe_visitante']->nome_equipe ?? "") . '
+            // </div>
+            // </div>
+            // </div>
+
+            // <p class="text-center text-success mt-3"><strong>' . $confronto['resultadoPartida'] . '</strong></p>
+            // </li>';
         }
 
         if (empty($list)) {
