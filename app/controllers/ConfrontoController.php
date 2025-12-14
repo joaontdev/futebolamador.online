@@ -68,6 +68,9 @@ class ConfrontoController
             if ($confronto['resultadoPartida'] === 'Aguardando') {
                 $resultadoConfronto = 'Aguardando';
                 $styleResultado = "color: #6c757d;";
+            } else if ($confronto['resultadoPartida'] === 'Empate') {
+                $resultadoConfronto = "Empate";
+                $styleResultado = "color: #ffc107;";
             } else {
                 $resultadoConfronto = "Vitória da Equipe " . $confronto['resultadoPartida'];
                 $styleResultado = "color: #28a745;";
