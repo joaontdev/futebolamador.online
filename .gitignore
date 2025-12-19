@@ -3,3 +3,4 @@
 # Ignorar o arquivo de variáveis de ambiente
 .env
 .htaccess
+.public/images/escudos

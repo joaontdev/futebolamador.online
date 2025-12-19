@@ -20,6 +20,8 @@ class Equipe
     public string $estado;
     public int $anoFundacao;
     public string $nomeComandante;
+    public string $escudo;
+
 
     // Colunas de controle de banco de dados
     public int $status = 1;      // 1 = Ativo, 0 = Inativo (Exemplo)
@@ -41,6 +43,7 @@ class Equipe
             $this->estado = $data['estado'] ?? '';
             $this->anoFundacao = $data['anoFundacao'] ?? 0;
             $this->nomeComandante = $data['nomeComandante'] ?? '';
+            $this->escudo = $data['escudo'] ?? '';
         }
     }
 
@@ -54,10 +57,10 @@ class Equipe
 
         $sql = "INSERT INTO equipes (
                     nome_equipe, logradouro, cidade, estado, ano_fundacao, 
-                    nome_comandante, status, is_deleted, created_at, updated_at
+                    nome_comandante, escudo, status, is_deleted, created_at, updated_at
                 ) VALUES (
                     :nome_equipe, :logradouro, :cidade, :estado, :ano_fundacao, 
-                    :nome_comandante, :status, :is_deleted, NOW(), NOW()
+                    :nome_comandante, :escudo, :status, :is_deleted, NOW(), NOW()
                 )";
 
         try {
@@ -70,6 +73,7 @@ class Equipe
             $stmt->bindValue(':estado', $this->estado, PDO::PARAM_STR);
             $stmt->bindValue(':ano_fundacao', $this->anoFundacao, PDO::PARAM_INT);
             $stmt->bindValue(':nome_comandante', $this->nomeComandante, PDO::PARAM_STR);
+            $stmt->bindValue(':escudo', $this->escudo, PDO::PARAM_STR);
 
             // Colunas de controle
             $stmt->bindValue(':status', $this->status, PDO::PARAM_INT);
@@ -135,55 +139,57 @@ class Equipe
     }
 
     /**
- * Atualiza o registro da equipe no banco de dados.
- * @return bool True em caso de sucesso, false em caso de falha.
- */
-public function update(): bool
-{
-    // Garante que existe um ID para atualização
-    if (empty($this->id)) {
-        return false;
-    }
+     * Atualiza o registro da equipe no banco de dados.
+     * @return bool True em caso de sucesso, false em caso de falha.
+     */
+    public function update(): bool
+    {
+        // Garante que existe um ID para atualização
+        if (empty($this->id)) {
+            return false;
+        }
 
-    $pdo = Database::getConnection();
+        $pdo = Database::getConnection();
 
-    $sql = "UPDATE equipes SET
+        $sql = "UPDATE equipes SET
                 nome_equipe      = :nome_equipe,
                 logradouro       = :logradouro,
                 cidade           = :cidade,
                 estado           = :estado,
                 ano_fundacao     = :ano_fundacao,
                 nome_comandante  = :nome_comandante,
+                escudo           = :escudo,
                 status           = :status,
                 is_deleted       = :is_deleted,
                 updated_at       = NOW()
             WHERE id = :id
               AND is_deleted = 0";
 
-    try {
-        $stmt = $pdo->prepare($sql);
+        try {
+            $stmt = $pdo->prepare($sql);
 
-        // Dados da equipe
-        $stmt->bindValue(':nome_equipe', $this->nomeEquipe, PDO::PARAM_STR);
-        $stmt->bindValue(':logradouro', $this->logradouro, PDO::PARAM_STR);
-        $stmt->bindValue(':cidade', $this->cidade, PDO::PARAM_STR);
-        $stmt->bindValue(':estado', $this->estado, PDO::PARAM_STR);
-        $stmt->bindValue(':ano_fundacao', $this->anoFundacao, PDO::PARAM_INT);
-        $stmt->bindValue(':nome_comandante', $this->nomeComandante, PDO::PARAM_STR);
+            // Dados da equipe
+            $stmt->bindValue(':nome_equipe', $this->nomeEquipe, PDO::PARAM_STR);
+            $stmt->bindValue(':logradouro', $this->logradouro, PDO::PARAM_STR);
+            $stmt->bindValue(':cidade', $this->cidade, PDO::PARAM_STR);
+            $stmt->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+            $stmt->bindValue(':ano_fundacao', $this->anoFundacao, PDO::PARAM_INT);
+            $stmt->bindValue(':nome_comandante', $this->nomeComandante, PDO::PARAM_STR);
+            $stmt->bindValue(':escudo', $this->escudo, PDO::PARAM_STR);
 
-        // Colunas de controle
-        $stmt->bindValue(':status', $this->status, PDO::PARAM_INT);
-        $stmt->bindValue(':is_deleted', $this->isDeleted, PDO::PARAM_INT);
 
-        // Identificador
-        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            // Colunas de controle
+            $stmt->bindValue(':status', $this->status, PDO::PARAM_INT);
+            $stmt->bindValue(':is_deleted', $this->isDeleted, PDO::PARAM_INT);
 
-        return $stmt->execute();
-    } catch (PDOException $e) {
-        // Log em ambiente de desenvolvimento
-        error_log("Erro de atualização da Equipe (ID {$this->id}): " . $e->getMessage());
-        return false;
+            // Identificador
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // Log em ambiente de desenvolvimento
+            error_log("Erro de atualização da Equipe (ID {$this->id}): " . $e->getMessage());
+            return false;
+        }
     }
-}
-
 }

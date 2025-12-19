@@ -24,79 +24,125 @@ class EquipeController
 {
     public function salvar()
     {
-        // --- 1. CONFIGURAÇÃO DE SAÍDA (Obrigatorio no início) ---
-        // Indica ao navegador que a resposta é JSON.
-        header('Content-Type: application/json');
 
-        // --- 2. COLETA DE DADOS ---
+
+        $escudo = null;
+        if (!empty($_FILES['escudo'])) {
+            $escudo = self::salvarEscudo($_FILES['escudo']);
+        }
+
         $data = [
-            // Usa o operador de coalescência null (??) para evitar "Undefined index"
-            'nomeEquipe'        =>  $_POST['nomeEquipe']        ?? '',
-            'logradouro'        =>  $_POST['logradouro']        ?? '',
-            'cidade'            =>  $_POST['cidade']            ?? '',
-            'estado'            =>  $_POST['estado']            ?? '',
-            // O cast (int) garante que o valor seja um número, evitando erros de tipo
-            'anoFundacao'       =>  (int) ($_POST['anoFundacao'] ?? 0),
-            'nomeComandante'    =>  $_POST['nomeComandante']    ?? '',
+            'nomeEquipe'        =>  $_POST['nomeEquipe']            ?? '',
+            'logradouro'        =>  $_POST['logradouro']            ?? '',
+            'cidade'            =>  $_POST['cidade']                ?? '',
+            'estado'            =>  $_POST['estado']                ?? '',
+            'anoFundacao'       =>  (int) ($_POST['anoFundacao']    ?? 0),
+            'nomeComandante'    =>  $_POST['nomeComandante']        ?? '',
+            'escudo'            =>  empty($escudo) ? null : $escudo,
         ];
 
         try {
-            // 3. Tenta Criar e Inserir
-
-            // Cria uma nova instância da Equipe.
-            // Se o Autoloader falhar AQUI, o erro Fatal ainda acontecerá, 
-            // mas assumimos que o Autoloader está funcionando após as correções no composer.json.
             $equipe = new Equipe($data);
 
-            // 4. Tenta inserir no banco de dados.
             if ($equipe->insert()) {
-                // Sucesso
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Equipe salva com sucesso!',
-                ]);
+                \header("Location: " . BASE_URL . "/sucesso-no-cadastro-de-confronto");
+                exit;
             } else {
-                // Falha na inserção (se o método insert retornar false por algum motivo)
-                http_response_code(500);
-                echo json_encode([
-                    'success' => false,
-                    'message' => 'Erro ao salvar a equipe no banco de dados (Insert retornou false).',
-                ]);
+
+                \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto?=Erro ao tentar inserir");
+                exit;
             }
         } catch (\PDOException $e) {
-            // 5. CAPTURA ERROS DE BANCO DE DADOS (Ex: Falha na conexão, Query SQL inválida)
-            http_response_code(500);
-            error_log("Erro de PDO: " . $e->getMessage()); // Loga o erro internamente
-            // Oi flor...
-            echo json_encode([
-                'success' => false,
-                'message' => 'Erro de conexão ou query no banco de dados.',
-                // Não é seguro expor a mensagem exata do banco para o usuário final
-            ]);
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
         } catch (\Exception $e) {
-            // 6. CAPTURA OUTROS ERROS (Ex: Classes não encontradas, erros de código)
-            http_response_code(500);
-            error_log("Erro geral: " . $e->getMessage()); // Loga o erro internamente
-            echo json_encode([
-                'success' => false,
-                'message' => 'Ocorreu um erro interno inesperado.',
-            ]);
+            \header("Location: " . BASE_URL . "/erro-no-cadastro-de-confronto");
+            exit;
         }
-
-        // Finaliza a execução para garantir que nada mais seja impresso no corpo JSON.
-        exit;
     }
 
 
-    // Função que cria uma list group de todas as equipes registradas no banco de dados.
-    // Essa é a lista:<a href="#" class="list-group-item list-group-item-action">
-    //     <div class="d-flex w-100 justify-content-between">
-    //         <h5 class="mb-1">NOME DA EQUIPE</h5>
-    //         <small class="text-body-secondary">-</small>
-    //     </div>
-    //     <p class="mb-1">Representante: Nome do representante</p>
-    //     <small class="text-body-secondary">Localizcao e ano de fundação</small>
-    // </a>
+    /**
+     * Faz upload do escudo (PNG) e salva no projeto
+     *
+     * @param array  $file   $_FILES['escudo']
+     * @param string $pasta  Pasta de destino (ex: 'uploads/escudos')
+     * @return string        Nome do arquivo salvo
+     * @throws Exception
+     */
+    private static function salvarEscudo(array $file): string
+    {
+
+        // Caminho absoluto da pasta
+        $pasta = __DIR__ . '../../../public/assets/images/escudos';
+
+        // 1. Verifica erro de upload
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            return "";
+        }
+
+        // 2. Valida MIME type (mais seguro)
+        $mime = mime_content_type($file['tmp_name']);
+        if ($mime !== 'image/png') {
+            return "";
+        }
+
+        // 3. Cria a pasta se não existir
+        if (!is_dir($pasta)) {
+            mkdir($pasta, 0755, true);
+        }
+
+        // 4. Gera nome único
+        $nomeArquivo = uniqid('escudo_', false) . '.png';
+
+        // 5. Caminho final
+        $caminhoFinal = rtrim($pasta, '/') . '/' . $nomeArquivo;
+
+        // 6. Move o arquivo
+        if (!move_uploaded_file($file['tmp_name'], $caminhoFinal)) {
+            return "";
+        }
+
+        return $nomeArquivo;
+    }
+
+
+    /**
+     * Remove uma imagem da pasta de escudos
+     *
+     * @param string $nomeArquivo Nome do arquivo (ex: escudo_xxxxx.png)
+     * @return bool
+     * @throws Exception
+     */
+    private static function apagarEscudo(string $nomeArquivo): bool
+    {
+        $pasta = __DIR__ . '../../../public/assets/images/escudos';
+
+        // Normaliza o caminho
+        $pasta = rtrim($pasta, '/');
+
+        // Caminho completo do arquivo
+        $caminhoArquivo = $pasta . '/' . $nomeArquivo;
+
+        // Segurança: evita apagar caminhos inválidos
+        if (!file_exists($caminhoArquivo)) {
+            return false;
+        }
+
+        if (!is_file($caminhoArquivo)) {
+            return false;
+        }
+
+        // Apaga o arquivo
+        if (!unlink($caminhoArquivo)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+
     public static function listarEquipes()
     {
 
@@ -205,28 +251,43 @@ class EquipeController
 
     public function editar()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $data = [
-                // Usa o operador de coalescência null (??) para evitar "Undefined index"
-                'nomeEquipe'        =>  $_POST['nomeEquipe']        ?? '',
-                'logradouro'        =>  $_POST['logradouro']        ?? '',
-                'cidade'            =>  $_POST['cidade']            ?? '',
-                'estado'            =>  $_POST['estado']            ?? '',
-                // O cast (int) garante que o valor seja um número, evitando erros de tipo
-                'anoFundacao'       =>  (int) ($_POST['anoFundacao'] ?? 0),
-                'nomeComandante'    =>  $_POST['nomeComandante']    ?? '',
-            ];
+        $escudo = null;
+        $equipeSelecionada = self::buscarPorId($_POST['idEquipe']);
+        if (!empty($_FILES['escudo'])) {
 
-            $equipe = new Equipe($data);
-            $equipe->id = (int) ($_POST['idEquipe'] ?? 0);
-            if ($equipe->update()) {
-                \header("Location: " . BASE_URL . "/dashboard");
-                exit;
+            if (!empty($equipeSelecionada->escudo)) {
+                self::apagarEscudo($equipeSelecionada->escudo);
             }
 
-            header("Location: " . BASE_URL . "/edicao-equipe?id=" . $equipe->id . "");
+            $escudo = self::salvarEscudo($_FILES['escudo']);
+        } else {
+            $escudo = $equipeSelecionada->escudo;
+        }
+
+
+        $data = [
+            // Usa o operador de coalescência null (??) para evitar "Undefined index"
+            'nomeEquipe'        =>  $_POST['nomeEquipe']        ?? '',
+            'logradouro'        =>  $_POST['logradouro']        ?? '',
+            'cidade'            =>  $_POST['cidade']            ?? '',
+            'estado'            =>  $_POST['estado']            ?? '',
+            // O cast (int) garante que o valor seja um número, evitando erros de tipo
+            'anoFundacao'       =>  (int) ($_POST['anoFundacao'] ?? 0),
+            'nomeComandante'    =>  $_POST['nomeComandante']    ?? '',
+            'escudo'            =>  empty($escudo) ? null : $escudo,
+        ];
+
+        $equipe = new Equipe($data);
+        $equipe->id = (int) ($_POST['idEquipe'] ?? 0);
+
+
+        if ($equipe->update()) {
+            \header("Location: " . BASE_URL . "/dashboard");
             exit;
         }
+
+        header("Location: " . BASE_URL . "/edicao-equipe?id=" . $equipe->id . "");
+        exit;
     }
 }

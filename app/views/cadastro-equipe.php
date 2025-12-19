@@ -44,8 +44,10 @@
                         </div>
 
                         <!-- Form -->
-                        <form id="cadastroEquipeForm" class="needs-validation" novalidate>
+                        <form action="<?= BASE_URL ?>/nova-equipe/salvar" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
                             <div class="row g-4">
+
+
                                 <!-- Nome da Equipe -->
                                 <div class="col-12">
                                     <label for="nomeEquipe" class="form-label fw-semibold">
@@ -144,6 +146,21 @@
                                         Por favor, informe o nome do comandante.
                                     </div>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label fw-semibold">
+                                            Selecione o escudo da equipe:
+                                        </label>
+                                        <input
+                                            class="form-control"
+                                            type="file"
+                                            name="escudo"
+                                            id="formFile"
+                                            accept="image/png">
+                                    </div>
+                                </div>
+
 
                                 <!-- Buttons -->
                                 <div class="col-12 mt-5">

@@ -71,7 +71,7 @@ $equipe = $equipeController->buscarPorId($equipeId);
                         </div>
 
                         <!-- Form -->
-                        <form action="<?= BASE_URL ?>/edicao-equipe/salvar" class="needs-validation" method="post" novalidate>
+                        <form action="<?= BASE_URL ?>/edicao-equipe/salvar" class="needs-validation" method="post" enctype="multipart/form-data"  novalidate>
                             <div class="row g-4">
 
                                 <div class="col-3">
@@ -181,6 +181,21 @@ $equipe = $equipeController->buscarPorId($equipeId);
                                         name="nomeComandante" value="<?= $equipe->nome_comandante ?>" required>
                                     <div class="invalid-feedback">
                                         Por favor, informe o nome do comandante.
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label fw-semibold">
+                                            Selecione o escudo da equipe:
+                                        </label>
+                                        <input
+                                            class="form-control"
+                                            type="file"
+                                            name="escudo"
+                                            id="formFile"
+                                            accept="image/png">
                                     </div>
                                 </div>
 

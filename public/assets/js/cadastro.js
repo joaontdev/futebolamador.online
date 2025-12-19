@@ -9,25 +9,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const dangerModal = new bootstrap.Modal(document.getElementById('dangerModal'));
 
     // Form validation
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
+    // form.addEventListener('submit', function (event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
 
-        // Validate form
-        if (form.checkValidity()) {
-            handleFormSubmission();
-        } else {
-            // Show validation errors
-            form.classList.add('was-validated');
+    //     // Validate form
+    //     if (form.checkValidity()) {
+    //         handleFormSubmission();
+    //     } else {
+    //         // Show validation errors
+    //         form.classList.add('was-validated');
 
-            // Focus on first invalid field
-            const firstInvalidField = form.querySelector('.form-control:invalid, .form-select:invalid');
-            if (firstInvalidField) {
-                firstInvalidField.focus();
-                firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-    });
+    //         // Focus on first invalid field
+    //         const firstInvalidField = form.querySelector('.form-control:invalid, .form-select:invalid');
+    //         if (firstInvalidField) {
+    //             firstInvalidField.focus();
+    //             firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    //         }
+    //     }
+    // });
 
     // Handle form submission
     async function handleFormSubmission() {
