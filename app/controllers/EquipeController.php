@@ -159,7 +159,7 @@ class EquipeController
         $indice = 1;
         foreach ($equipes as $equipe) {
 
-            if ($equipe->status == 0) {
+            if ($equipe['status'] == 0) {
                 continue;
             }
 
@@ -201,7 +201,7 @@ class EquipeController
 
         foreach ($equipes as $e) {
 
-            if ($e->status == 0) {
+            if ($e['status'] == 0) {
                 continue;
             }
 
