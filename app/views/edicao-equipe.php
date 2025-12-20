@@ -71,7 +71,7 @@ $equipe = $equipeController->buscarPorId($equipeId);
                         </div>
 
                         <!-- Form -->
-                        <form action="<?= BASE_URL ?>/edicao-equipe/salvar" class="needs-validation" method="post" enctype="multipart/form-data"  novalidate>
+                        <form action="<?= BASE_URL ?>/edicao-equipe/salvar" class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             <div class="row g-4">
 
                                 <div class="col-3">
@@ -186,18 +186,26 @@ $equipe = $equipeController->buscarPorId($equipeId);
 
 
                                 <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label fw-semibold">
-                                            Selecione o escudo da equipe:
-                                        </label>
-                                        <input
-                                            class="form-control"
-                                            type="file"
-                                            name="escudo"
-                                            id="formFile"
-                                            accept="image/png">
-                                    </div>
+                                    <label for="formFile" class="form-label fw-semibold">
+                                        Selecione o escudo da equipe:
+                                    </label>
+                                    <input
+                                        class="form-control"
+                                        type="file"
+                                        name="escudo"
+                                        id="formFile"
+                                        accept="image/png">
                                 </div>
+                                <div class="col-md-12">
+                                    <label for="status" class="form-label fw-semibold">
+                                        <i class="bi bi-map me-2 text-success"></i>Status
+                                    </label>
+                                    <select class="form-select form-select-lg" id="status" name="status" required>
+                                        <option value="1" <?= ($equipe->status == "1" ? "selected" : "") ?>>Ativo</option>
+                                        <option value="0" <?= ($equipe->status == "0" ? "selected" : "") ?>>Inativo</option>
+                                    </select>
+                                </div>
+
 
                                 <!-- Buttons -->
                                 <div class="col-12 mt-5">

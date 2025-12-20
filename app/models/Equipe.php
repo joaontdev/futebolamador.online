@@ -44,6 +44,7 @@ class Equipe
             $this->anoFundacao = $data['anoFundacao'] ?? 0;
             $this->nomeComandante = $data['nomeComandante'] ?? '';
             $this->escudo = $data['escudo'] ?? '';
+            $this->status = $data['status'] ?? 1;
         }
     }
 

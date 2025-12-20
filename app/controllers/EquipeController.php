@@ -159,6 +159,10 @@ class EquipeController
         $indice = 1;
         foreach ($equipes as $equipe) {
 
+            if ($equipe->status == 0) {
+                continue;
+            }
+
             $color = "";
             if ($indice != 1) {
                 $color = "bg-light";
@@ -196,6 +200,10 @@ class EquipeController
         $equipes = $equipe->getEquipes();
 
         foreach ($equipes as $e) {
+
+            if ($e->status == 0) {
+                continue;
+            }
 
             // Verifica se é a equipe selecionada
             $selected = ($idSelecionado !== null && $idSelecionado == $e['id']) ? " selected" : "";
@@ -276,6 +284,7 @@ class EquipeController
             'anoFundacao'       =>  (int) ($_POST['anoFundacao'] ?? 0),
             'nomeComandante'    =>  $_POST['nomeComandante']    ?? '',
             'escudo'            =>  empty($escudo) ? null : $escudo,
+            'status'            =>  $_POST['status']            ?? 'Ativo',
         ];
 
         $equipe = new Equipe($data);
