@@ -98,7 +98,7 @@ class ConfrontoController
             }
 
             // 
-            $list .= '<li class="list-group-item rounded-4 mb-2 shadow p-3 mb-5 bg-body-tertiary rounded">
+            $list .= '<li class="list-group-item rounded-4 mb-3 shadow p-3 bg-body-tertiary rounded">
                             <p class="text-center mt-3 mb-3 fw-light" style="font-size: 0.9rem;">
                             <i class="bi bi-geo-alt"></i>
                             ' . $local . '
