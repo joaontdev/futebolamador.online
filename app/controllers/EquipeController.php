@@ -174,7 +174,7 @@ class EquipeController
             $lista .= '<a href="#" class="list-group-item list-group-item-action d-flex align-items-center ' . $color . ' ">';
             $lista .= '<img src="' . BASE_URL  . '/public/assets/images/escudos/' . $equipe['escudo'] . '"';
             $lista .= 'alt="' . $equipe['nomeEquipe'] . '"';
-            $lista .= 'style="width:40px; height:40px; object-fit:cover; margin-right:10px;">';
+            $lista .= 'style="width:40px; height:40px; object-fit:contain; margin-right:10px;">';
             $lista .= '<div class="flex-grow-1">';
             $lista .= '<div class="d-flex w-100 justify-content-between">';
             $lista .= '<h6 class="mb-1 text-dark">' . $equipe['nomeEquipe'] . '</h6>';
