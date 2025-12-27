@@ -121,7 +121,8 @@ class Equipe
                 'status' => $equipe->status,
                 'isDeleted' => $equipe->is_deleted,
                 'createdAt' => $equipe->created_at,
-                'updatedAt' => $equipe->updated_at
+                'updatedAt' => $equipe->updated_at,
+                'escudo' => $equipe->escudo,
             ];
         }
 

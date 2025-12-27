@@ -52,7 +52,7 @@ use App\Controllers\EquipeController;
                             </p>
                         </div>
                         <div class="list-group mb-5">
-
+                           
                             <?php
 
                             // Criar a listagem ser usando apenas o require onde, pois o name space nao funciona em minha hospedagem
