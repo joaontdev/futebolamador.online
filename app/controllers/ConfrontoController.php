@@ -11,6 +11,8 @@ require_once __DIR__ . '/../core/Database.php';
 use App\Models\Confronto;
 
 
+// Teste de deployment
+
 class ConfrontoController
 {
 
